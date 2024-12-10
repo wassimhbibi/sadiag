@@ -1,0 +1,113 @@
+<!-- Start Page Title Area -->
+<section class="page-title-area uk-page-title">
+    <div class="uk-container">
+        <h1>DIAGNOSTIC IMMO</h1>
+        <ul>
+           
+            <h5><li>DIAGNOSTICS IMMOBILIERS À PARIS ET DANS TOUTE LA FRANCE</li></h5>
+        </ul>
+    </div>
+</section>
+<!-- End Page Title Area -->
+<section class="services-area uk-services uk-section">
+    <div class="uk-container">
+        <div class="container">
+            <h2>Que souhaitez-vous faire ?</h2>
+            <p>Veuillez sélectionner une option parmi les choix ci-dessous</p>
+            
+            <!-- Responsive card grid using UK classes -->
+            <div class="uk-grid uk-grid-small uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1" uk-grid>
+                <div *ngFor="let option of options; let i = index"
+                     class="card"
+                     [ngClass]="{'selected': selectedOptionIndex === i}"
+                     (click)="selectOption(i)">
+                    <ng-container *ngIf="option.icon">
+                        <i class="icon-info"></i>
+                    </ng-container>
+                    <ng-container *ngIf="option.image">
+                        <img [src]="option.image" alt="{{ option.label }}" />
+                    </ng-container>
+                    <hr [ngClass]="{ 'separator-line': true, 'selected-line': selectedOptionIndex === i }"/>
+                    <p [class.selected-text]="selectedOptionIndex === i">{{ option.label }}</p>
+                </div>
+            </div>
+            
+            <p style="transform: translateY(40%);color:#263548 ;">Pour toute autre demande ou question, notre équipe est là pour vous aider. Contactez-nous à l'adresse 
+                <a (click)="mail()">contact@sadiag.com</a>.
+            </p>
+            
+            <!-- Responsive button style -->
+            <a (click)="navigateToRoute()"class="uk-button uk-button-default full-width-button" 
+               [attr.disabled]="selectedOptionIndex === null ? true : null">Continuer</a>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Start Contact Area -->
+
+
+
+
+<section id="clients" class="feedback-area uk-dark uk-section uk-feedback">
+    <div class="uk-container">
+        <div class="uk-grid uk-grid-match uk-grid-medium uk-child-width-1-2@m uk-child-width-1-1@s">
+            <!-- Left Item -->
+            <div class="item">
+                <div class="feedback-img">
+                    <div class="feedback-inner">
+                        <div class="uk-section-title section-title">
+                            <h1><span>Diagnostic Immo</span></h1>
+                            <h5><span class="checkmark">&#10004;</span>Un réseau de diagnostiqueurs professionnels <br> à Paris et dans toute la France</h5>
+                            <h5><span class="checkmark">&#10004;</span>Un système informatique de <br> pointe à votre service</h5>
+                            <h5><span class="checkmark">&#10004;</span>Des prix en toute transparence</h5>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Item -->
+            <div class="item" id="item">
+                <div class="feedback-img">
+                    <div class="feedback-inner">
+                        <div class="uk-section-title section-title">
+                            <h2>Contact</h2>
+                            <div class="bar"></div>
+                            <h5>Vous pouvez nous contacter par email : </h5> 
+                            <h5 id="br">contact@diagnostic.immo</h5>
+                            <h5>ou par téléphone : </h5> 
+                            <h5 id="br">01 59 38 01 80</h5>
+                            <h5>Vous pouvez remplir aussi le formulaire ci-dessous.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Start Contact Area -->
+<section id="contact" class="contact-area uk-contact uk-section">
+    <div class="uk-container">
+  
+      
+
+        
+     
+              
+                    <img src="/assets/image/france.webp" alt="map">
+
+                
+
+
+      
+
+    </div>
+</section>
+
+<!-- End Contact Area -->

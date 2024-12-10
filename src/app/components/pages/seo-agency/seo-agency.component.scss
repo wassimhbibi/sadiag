@@ -1,0 +1,149 @@
+.widget-container {
+    position: relative;
+}
+
+.widget.service_list {
+    position: sticky;
+    top: 10px; 
+    padding: 1em;
+    border-radius: 5px;
+    z-index: 1000;
+    background-color: rgb(235, 235, 235); 
+}
+
+
+.uk-first-column{
+    position: sticky;
+
+}
+
+.liste{
+   background-color: rgb(235, 235, 235);
+}
+
+
+
+
+.faq-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    border-top: 1px solid #ddd;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 10px;
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.faq-question span {
+    color: #76a319;
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.faq-answer {
+    padding-top: 10px;
+    font-size: 0.95em;
+    color: #333;
+}
+
+.h1-faq{
+    z-index: 9999 !important; font-size: 50px;
+}
+
+.h1-li{
+    z-index: 9999 !important; 
+}
+
+.items{
+    margin-top: 100px;
+}
+
+
+.page-title-areaa {
+        background: {
+      
+            image: url(/assets/image/faq.jpg);
+      
+          }  
+        padding: {
+          top: 200px;
+          bottom: 125px;
+        }
+        text-align: center;
+        z-index: 1;
+        position: relative;
+        background: {
+          position: center center;
+        
+          size: cover;
+          repeat: no-repeat;
+          attachment: fixed;
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          background:#263548; ;
+          opacity: 0.77;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+        }
+        h1 {
+          font: {
+            size: 34px;
+            weight: 700;
+          }
+          color: white;
+          position: relative;
+          margin: 0;
+        }
+        ul {
+          padding: 0;
+          margin: 20px 0 0;
+          list-style-type: none;
+      
+          li {
+            display: inline-block;
+            margin-right: 20px;
+            color: #8cbe23;
+            position: relative;
+      
+            a {
+              display: block;
+              color: white;
+      
+              &:hover,
+              &:focus {
+                color: #8cbe23;
+              }
+            }
+            &::before {
+              content: "";
+              position: absolute;
+              left: -10px;
+              top: 4px;
+              width: 2px;
+              height: 14px;
+              background: white;
+              transform: rotate(11deg);
+            }
+            &:first-child {
+              &::before {
+                display: none;
+              }
+            }
+          }
+        }
+      }

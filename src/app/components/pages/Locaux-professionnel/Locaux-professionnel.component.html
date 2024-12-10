@@ -1,0 +1,650 @@
+<section class="page-title-area uk-section uk-funfacts sec11">
+  <div class="overlay"></div>
+  <div class="uk-container">
+      <div class="text-content">
+          <h1 class="h1-sec11">Obtenez un devis rapide</h1>
+          <h5><p class="p-sec11">DIAGNOSTICS IMMOBILIERS À PARIS ET DANS TOUTE LA FRANCE</p></h5>
+          <a routerLink="/une-question" class="uk-button uk-button-default">UNE QUESTION ?</a>
+      </div>
+  </div>
+</section>
+
+<!-- Start Contact Area -->
+<section id="contact" class="contact-area uk-contact uk-section">
+  <div class="uk-container">
+      <div class="item">
+          <div class="uk-section-title section-title">
+              
+        <h3>Locaux Professionnels</h3>
+        <span>{{step}}/4</span>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <div class="progress-step active" [style.width]="progressWidth + '%'"></div>
+        
+      </div>
+          <p *ngIf="step===1">Détails du bien & Diagnostics</p>
+          <p  *ngIf="step===2">Diagnostics</p>
+          <p  *ngIf="step===3">Vos coordonnées</p>
+          <p  *ngIf="step===4">Panier</p>
+      
+        </div>
+          <form id="contactForm">
+   
+              <div id="contactForm" *ngIf="step === 1"  >
+                <div class="uk-section-title section-title">
+              
+               
+              </div>
+      
+                  <h6 class="h6-project"><span class="span-project">1</span> 
+                   
+                    Détails du bien & Diagnostics</h6>
+                  <div class="message-box">
+                      <img src="/assets/image/information-button.png" style="transform: translate(-30%,-40%);width: 20px;">
+                      Afin de recevoir votre devis, veuillez svp remplir les champs suivants et répondre aux questions éventuelles
+                  </div>
+                  
+                  <form [formGroup]="Formrappel" (ngSubmit)="onSubmit()">
+                    <!-- Adresse du bien -->
+                    <h5>Quelle est l'adresse du bien ?</h5>
+                    <div class="input-containerr">
+                      <img src="/assets/image/location.png" alt="Icon" class="input-icon" />
+                      <input 
+                        type="text" 
+                        formControlName="adresse_du_bien" 
+                        id="uk-input" 
+                        class="uk-input" 
+                        placeholder="Saisissez l'adresse du bien"
+                        (input)="clearError('adresse_du_bien')" 
+                      />
+                    </div>
+                    <small *ngIf=" formControls.adresse_du_bien.invalid && formControls.adresse_du_bien.touched" >
+                      Ce champ est obligatoire
+                    </small>
+                  
+                    <!-- Code postal -->
+                    <h5>Code postal</h5>
+                    <div class="input-containerr">
+                      <input 
+                        type="text" 
+                        formControlName="code_postal" 
+                        class="uk-input" 
+                        placeholder="Veuillez saisir votre code postal"
+                        (input)="clearError('code_postal')"
+                        required pattern="^[0-9]{5}$" />
+                    </div>
+                    <small *ngIf="formControls.code_postal.errors?.['required'] && formControls.code_postal.touched" >
+                      Ce champ est obligatoire
+                    </small>
+                    <div>
+                    <small *ngIf="formControls.code_postal.errors?.['pattern']">Le code postal doit être composé de 5 chiffres.</small>
+                  </div>
+                    <!-- Type de local professionnel -->
+                    <h5>Type de local professionnel</h5>
+                    <div class="input-containerr">
+                      <select 
+                        class="uk-input" 
+                        formControlName="projet" 
+                        required 
+                        (change)="onSelectChange($event)"
+                      >
+                        <option value="" disabled selected></option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Bureaux">Bureaux</option>
+                        <option value="Hôtel">Hôtel</option>
+                        <option value="Atelier">Atelier</option>
+                        <option value="Entrepôt">Entrepôt</option>
+                        <option value="Bâtiment industriel">Bâtiment industriel</option>
+                        <option value="Autre">Autre</option>
+                      </select>
+                    </div>
+                    <small *ngIf=" formControls.projet.invalid && formControls.projet.touched" >
+                      Ce champ est obligatoire
+                    </small>
+                  
+                    <!-- Additional fields for 'Autre' -->
+                    <div *ngIf=" selectedObjective.local === 'Autre'">
+                      <h5>Type de local</h5>
+                      <div class="input-containerr">
+                        <input 
+                          type="text" 
+                          formControlName="Type_de_autre_local" 
+
+                          class="uk-input" 
+                          placeholder="Veuillez préciser le type de local" 
+                          (input)="clearError('autreLocal')"
+                        />
+                      </div>
+                    </div>
+                  
+                    <!-- Additional fields for 'Hôtel' -->
+                    <div *ngIf=" selectedObjective.local === 'Hôtel'">
+                      <h5>Nombre de chambres au total</h5>
+                      <div class="input-containerr">
+                        <input 
+                          type="number" 
+                          formControlName="Nombre_de_chambres_au_total" 
+
+                          min="1" 
+                          class="uk-input" 
+                          placeholder="Veuillez préciser le nombre de chambres"
+                          (input)="clearError('hotelRooms')"
+                        />
+                      </div>
+                    </div>
+                  
+                    <!-- Surface -->
+                    <h5>Quelle est la surface totale du bien ?</h5>
+                    <div class="input-container">
+                      <img src="/assets/image/width.png" alt="Icon" class="input-icon" />
+                      <input 
+                        type="number" 
+                        min="1" 
+                        formControlName="surface" 
+
+                        id="uk-inputt" 
+                        class="uk-input" 
+                        placeholder="80 par ex."
+                        (input)="clearError('surface')"
+                      />
+                    </div>
+                    <small *ngIf=" formControls.surface.invalid && formControls.surface.touched" >
+                      Ce champ est obligatoire
+                    </small>
+                  
+                    <!-- Diagnostics -->
+                    <h5>Veuillez sélectionner les diagnostics que vous souhaitez réaliser</h5>
+                    <div class="property-types">
+                      <ng-container>
+                        <div 
+                          class="property-type objective-button"
+                          *ngFor="let diagnostic of diagnostics"
+                          [ngClass]="{'active': selectedPropertyType.includes(diagnostic.type)}"
+                          (click)="setPropertyType(diagnostic.type)"
+                        >
+                          <img [src]="diagnostic.image" style="width: 100px; margin-bottom: 20px;" />
+                          <br />
+                          {{ diagnostic.type }}
+                          <span *ngIf="selectedPropertyType.includes(diagnostic.type)" class="check-icon">✔</span>
+                        </div>
+                      </ng-container>
+                    </div>
+                    <small *ngIf="showError && selectedPropertyType.length === 0" >
+                      Ce champ est obligatoire
+                    </small>
+                  
+                    <!-- Submit button -->
+                 
+                  </form>
+                 
+                  <div id="errorr">
+                  <small *ngIf="showError2"  >
+                    <div class="message-box2">
+                      <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+                    Touts les champs est obligatoire
+                  </div>
+                  </small>
+                  </div>
+                  
+                  
+          </div>
+          <div id="contactForm" *ngIf="step === 2">
+            <div class="uk-section-title section-title">
+          </div>
+  
+              <h6 class="h6-project"><span class="span-project">2</span> 
+               
+ 
+                  Diagnostics</h6>
+              <div class="message-box">
+                  <img src="/assets/image/information-button.png" style="transform: translate(-30%,-10%);width: 20px;">
+                  Afin de recevoir votre devis, veuillez svp remplir les champs suivants et répondre aux questions éventuelles
+              </div>
+              
+            <div>
+              <div class="panier-box" *ngIf="panier.length>0">
+                <div class="panier-box2">
+                   <h5 class="h5-panier">
+                     <img class="icon-panier" src="/assets/image/panier.png">
+                     Ma sélection ({{panier.length}})
+                   </h5>
+                   <a class="del-panier" (click)="viderPanier()">Vider le panier</a>
+                </div>
+                
+                <div  *ngFor="let item of panier">
+                 <div class="item-container">
+                   <img [src]="item.image" width="50" class="img-panier">
+                   <div class="item-details">
+                  <span class="item-name">{{item.name}}</span> <br>
+                   <div class="qnt-div"> <span class="qnt-span"> Quantité: {{item.Quantite}}</span></div>
+                   </div>
+                   </div>
+                   <a  class="ret-btn" (click)="RetirerDiagnostic(item.name)">Retirer</a>
+                   <hr class="hr-panier">
+           
+                </div>
+                
+             </div>
+
+
+<h4>Tous les Diagnostics</h4>
+<div *ngFor="let dic of diagnostics">
+  <div class="faq-item">
+    <div class="faq-question" (click)="toggleAnswer(dic)">
+      <span>{{ isOpen[dic.type] ? '↓' : '→' }}</span>
+      <img [src]="dic.image" width="60" style="margin-right: 10px; border-radius: 4px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+        {{ dic.type }}
+        <a class="add-btn" (click)="ajouterAuPanier($event, dic.type, dic.image)">Ajouter</a>
+      </div>
+    </div>
+    <div class="faq-answer" *ngIf="isOpen[dic.type]">
+      <hr>
+      <p>{{ dic.description }}</p>
+    </div>
+  </div>
+</div>
+<div id="errorr">
+  <small *ngIf="showError"  >
+    <div class="message-box2">
+      <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+    Touts les champs est obligatoire
+  </div>
+  </small>
+</div>
+</div>
+      </div>
+
+    </form> 
+
+    <div id="contactForm" *ngIf="step === 3"  >
+
+      <h6 class="h6-project"><span class="span-project">3</span> Informations personnelles</h6>
+              
+                 <div class="message-box">
+                    <i class="fas fa-info-circle"></i>
+                    Afin de recevoir votre devis, veuillez svp remplir les champs suivants et répondre aux questions éventuelles
+                  </div>
+              
+              
+                  <h5>Êtes-vous un(e)... </h5>
+                  <div class="objective-buttons">
+                    <a class="objective-button" 
+                       [ngClass]="{'active': selectedObjectives2['Type de donneur d ordre'] === 'particulier (propriétaire du bien)'}" 
+                       (click)="setActive('Type de donneur d ordre', 'particulier (propriétaire du bien)')">
+                       particulier (propriétaire du bien) <span *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'particulier (propriétaire du bien)'" class="check-icon">✔</span>
+                    </a>
+                    <a class="objective-button" 
+                       [ngClass]="{'active': selectedObjectives2['Type de donneur d ordre'] === 'société (propriétaire du bien)'}" 
+                       (click)="setActive('Type de donneur d ordre', 'société (propriétaire du bien)')">
+                       société (propriétaire du bien) <span *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'société (propriétaire du bien)'" class="check-icon">✔</span>
+                    </a>
+                    <a class="objective-button" 
+                       [ngClass]="{'active': selectedObjectives2['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'}" 
+                       (click)="setActive('Type de donneur d ordre', 'professionnel mandaté par le propriétaire')">
+                       professionnel mandaté par le propriétaire <span *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'" class="check-icon">✔</span>
+                    </a>
+                  </div>
+              
+              
+    
+             
+                
+                        <div class="item">
+                      
+                          
+                             <div *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'">                       
+              
+                                 <div id="cordonee" >
+                   
+                                     
+                                   <div class="form-row">
+                                     <div class="input-group">
+                                       <label for="prenom">Nom de votre société (intermédiaire)</label>
+                                       <input type="text" placeholder="Saisir le nom  de votre société" class="uk-input" [(ngModel)]="selectedObjectives2['Nom de votre société (intermédiaire)']" 
+                                       (ngModelChange)="setActive('Nom de votre société (intermédiaire)', $event)">                              
+                                     </div>
+                        
+                      
+                                 
+                                   </div>
+                                 </div>
+                   
+                                 </div>
+                             <div *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'société (propriétaire du bien)'">
+                                <h6>Société </h6>
+                 
+                               <div id="cordonee" >
+                 
+                                 <div class="form-row">
+                                   <div class="input-group">
+                                     <label for="prenom">Nom de votre société</label>
+                                     <input type="text" id="nom_societe"  placeholder="Saisir le nom de votre société" required  [(ngModel)]="selectedObjectives2['Nom de votre société']" 
+                                     (ngModelChange)="setActive('Nom de votre société', $event)">
+                                     
+                                   </div>
+                      
+                    
+                               
+                                 </div>
+                               </div>
+                 
+                               </div>
+                     
+                              
+                             <div >
+                            
+                               <div>
+                                  
+                               </div>
+                                <h6 *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'particulier (propriétaire du bien)'" >
+                                   Vos coordonnées
+                                 </h6>
+              
+                                 <h6 *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'société (propriétaire du bien)'" >
+                                   Contact principal
+                                </h6>
+                                 
+                                 
+                                 
+              
+                             
+                                                
+                            <div id="cordonee" *ngIf="selectedObjectives2['Type de donneur d ordre'] !=undefined ">
+              
+                              <div class="form-row">
+                                <div class="input-group">
+                                  <label for="prenom">Prénom</label>
+                                  <input type="text" id="prenom"  placeholder="Saisir votre prénom" required  [(ngModel)]="selectedObjectives2['Prénom']" 
+                                  (ngModelChange)="setActive('Prénom', $event)">
+                                  <div *ngIf="formControls.prenom.invalid && (formControls.prenom.dirty || formControls.prenom.touched)">
+                                    <small *ngIf="formControls.prenom.errors?.['required']">Prénom is required.</small>
+                                  </div>
+                                </div>
+                  
+                                <div class="input-group">
+                                  <label for="nom">Nom</label>
+                                  <input type="text" id="nom"  placeholder="Saisir votre nom" required [(ngModel)]="selectedObjectives2['Nom']" 
+                                  (ngModelChange)="setActive('Nom', $event)">
+                                  <div *ngIf="formControls.nom.invalid && (formControls.nom.dirty || formControls.nom.touched)">
+                                    <small *ngIf="formControls.nom.errors?.['required']">Nom is required.</small>
+                                  </div>
+                                </div>
+                              </div>
+                  
+                              <div class="form-row">
+                                <div class="input-group">
+                                  <label for="email">Email</label>
+                                  <input type="email" id="email"  placeholder="Saisir votre email" required [(ngModel)]="selectedObjectives2['Email']" 
+                                  (ngModelChange)="setActive('Email', $event)">
+                                  <div *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)">
+                                    <small *ngIf="formControls.email.errors?.['required']">Email is required.</small>
+                                    <small *ngIf="formControls.email.errors?.['email']">Please enter a valid email address.</small>
+                                  </div>
+                                </div>
+                  
+                                <div class="input-group">
+                                  <label for="telephone">Téléphone</label>
+                                  <input type="tel" id="telephone"  placeholder="Saisir votre téléphone" required [(ngModel)]="selectedObjectives2['Téléphone']" 
+                                  (ngModelChange)="setActive('Téléphone', $event)">
+                                  <div *ngIf="formControls.telephone.invalid && (formControls.telephone.dirty || formControls.telephone.touched)">
+                                    <small *ngIf="formControls.telephone.errors?.['required']">Téléphone is required.</small>
+                                  </div>
+                                </div>
+                              </div>
+              
+              
+              
+                         
+                            </div>
+                       
+                      
+              
+                            </div>
+              
+                        
+              
+                          
+              
+                            <div  *ngIf="selectedObjectives2['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'">
+                             <h5 >
+                                Votre client est un(e)....</h5>
+                             <div class="objective-buttonse" >
+                                 <a class="objective-button" [ngClass]="{'active': selectedObjectives2['Votre client est un(e)'] === 'particulier'}" (click)="setActive('Votre client est un(e)','particulier')">
+                                     particulier <span *ngIf="selectedObjectives2['Votre client est un(e)'] === 'particulier'" class="check-icon">✔</span>
+                                 </a>
+                                 <a class="objective-button" [ngClass]="{'active': selectedObjectives2['Votre client est un(e)'] === 'Société'}" (click)="setActive('Votre client est un(e)','Société')">
+                                     société <span *ngIf="selectedObjectives2['Votre client est un(e)'] === 'Société'" class="check-icon">✔</span>
+                                 </a>
+  
+                                 </div>
+                             </div>
+                             <div *ngIf="selectedObjectives2['Votre client est un(e)'] === 'Société' && selectedObjectives2['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire' "  >
+                                <div id="pre"> <label>Société</label>
+                                 <div id="cordoneer" >
+                               
+                                     <div class="form-row">
+                                       <div class="input-group">
+                                         <label for="prenom">Nom de votre société (client)</label>
+                                         <input type="text" placeholder="Nom de votre société (client)" class="uk-input" [(ngModel)]="selectedObjectives2['Nom de votre société (client)']" 
+                                         (ngModelChange)="setActive('Nom de votre société (client)', $event)">                               
+                                       </div>
+                                     </div>
+                            </div>
+                            </div>
+                            <label for="prenom">Contact principal</label>
+                                 <div id="cordonee" >
+                                     
+  
+                                      <div class="form-row">
+                                        <div class="input-group">
+                                          <label for="prenom">Nom du contact principal</label>
+                                          <input type="text" id="prenom"  placeholder="Saisir votre prénom" required [(ngModel)]="selectedObjectives2['Nom du contact principal']" 
+                                          (ngModelChange)="setActive('Nom du contact principal', $event)">
+                                          <div *ngIf="formControls.prenom.invalid && (formControls.prenom.dirty || formControls.prenom.touched)">
+                                            <small *ngIf="formControls.prenom.errors?.['required']">Prénom is required.</small>
+                                          </div>
+                                        </div>
+                          
+                                     
+                                      </div>
+                          
+                                      <div class="form-row">
+                                        <div class="input-group">
+                                          <label for="email">Email</label>
+                                          <input type="email" id="email"  placeholder="Saisir votre email" required [(ngModel)]="selectedObjectives2['Email de contact principal']" 
+                                          (ngModelChange)="setActive('Email de contact principal', $event)">
+                                          <div *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)">
+                                            <small *ngIf="formControls.email.errors?.['required']">Email is required.</small>
+                                            <small *ngIf="formControls.email.errors?.['email']">Please enter a valid email address.</small>
+                                          </div>
+                                        </div>
+                          
+                                        <div class="input-group">
+                                          <label for="telephone">Téléphone</label>
+                                          <input type="tel" id="telephone"  placeholder="Saisir votre téléphone" required  [(ngModel)]="selectedObjectives2['Téléphone de contact principal']" 
+                                          (ngModelChange)="setActive('Téléphone de contact principal', $event)">
+                                          <div *ngIf="formControls.telephone.invalid && (formControls.telephone.dirty || formControls.telephone.touched)">
+                                            <small *ngIf="formControls.telephone.errors?.['required']">Téléphone is required.</small>
+                                          </div>
+                                        </div>
+                                      </div>
+                      
+                      
+                      
+                                 
+                                    </div>
+                                 </div>
+                                 <div *ngIf="selectedObjectives2['Votre client est un(e)'] === 'particulier' && selectedObjectives2['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'">
+                               
+                                 <label for="prenom">Client</label>
+                                      <div id="cordonee" >
+                                          
+                                           <div class="form-row">
+                                             <div class="input-group">
+                                               <label for="prenom">Prénom du client</label>
+                                               <input type="text" id="prenom"  placeholder="Saisir votre prénom" required  [(ngModel)]="selectedObjectives2['Prénom du client']" 
+                                               (ngModelChange)="setActive('Prénom du client', $event)">
+                                               <div *ngIf="formControls.prenom.invalid && (formControls.prenom.dirty || formControls.prenom.touched)">
+                                                 <small *ngIf="formControls.prenom.errors?.['required']">Prénom is required.</small>
+                                               </div>
+                                             </div>
+                               
+                                             <div class="input-group">
+                                               <label for="nom">Nom du client</label>
+                                               <input type="text" id="nom"  placeholder="Saisir votre nom" required [(ngModel)]="selectedObjectives2['Nom du client']" 
+                                               (ngModelChange)="setActive('Nom du client', $event)">
+                                               <div *ngIf="formControls.nom.invalid && (formControls.nom.dirty || formControls.nom.touched)">
+                                                 <small *ngIf="formControls.nom.errors?.['required']">Nom is required.</small>
+                                               </div>
+                                             </div>
+                                           </div>
+                               
+                                           <div class="form-row">
+                                             <div class="input-group">
+                                               <label for="email">Email</label>
+                                               <input type="email" id="email"  placeholder="Saisir votre email" required [(ngModel)]="selectedObjectives2['Email de client']" 
+                                               (ngModelChange)="setActive('Email de client', $event)">
+                                               <div *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)">
+                                                 <small *ngIf="formControls.email.errors?.['required']">Email is required.</small>
+                                                 <small *ngIf="formControls.email.errors?.['Email de client']">Please enter a valid email address.</small>
+                                               </div>
+                                             </div>
+                               
+                                             <div class="input-group">
+                                               <label for="telephone">Téléphone</label>
+                                               <input type="tel" id="telephone"  placeholder="Saisir votre téléphone" required [(ngModel)]="selectedObjectives2['Téléphone de client']" 
+                                               (ngModelChange)="setActive('Téléphone de client', $event)">
+                                               <div *ngIf="formControls.telephone.invalid && (formControls.telephone.dirty || formControls.telephone.touched)">
+                                                 <small *ngIf="formControls.telephone.errors?.['required']">Téléphone is required.</small>
+                                               </div>
+                                             </div>
+                                           </div>
+                           
+                           
+                           
+                                      
+                                         </div>
+                                      </div>
+  
+                                   
+                            <h5>Commentaire</h5>
+                            <textarea id="message"  rows="4" placeholder="Saisir votre commentaire" required [(ngModel)]="selectedObjectives2['Commentaire']" 
+                            (ngModelChange)="setActive('Commentaire', $event)">
+                               
+                            </textarea>
+                            <div id="error" *ngIf="errorMessage" class="error-message">
+                              <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">  {{ errorMessage }}
+                            </div>
+                        
+                            
+                             
+                        </div>
+  
+    
+    </div>
+        
+
+          <div id="contactForm" *ngIf="step === 4"  >
+            <h6 class="h6-project"><span class="span-project">4</span> Votre panier</h6>
+                      
+            <div class="message-box">
+               <i class="fas fa-info-circle"></i>
+               Veuillez svp vérifier les détails de votre panier avant de passer à la dernière étape.
+             </div>
+          
+           
+            
+             <h6 >Détails du panier</h6>
+          
+          
+             <div class="panierr">
+          
+           <div>
+            <a class="modf-panier" (click)="Modifier('Votre projet')">Modifier</a>
+          
+               <span class="panier-details-span"><img class="icon-panier" src="/assets/image/panier.png">
+          
+          
+                  Votre projet</span>
+          
+                  <ul>
+                     <li class="li-step5" *ngFor="let item of selectedObjectives | keyvalue">
+                      <span class="key">{{ item.key }} :</span> <span>{{ item.value }}</span> 
+                     </li>
+                   </ul>
+                   
+          
+          
+             </div>
+            <hr>
+          
+            
+          
+                <div>
+                  <a class="modf-panier" (click)="Modifier('Informations personnelle')">Modifier</a>
+               
+                     <span class="panier-details-span"> <img class="icon-panier" src="/assets/image/panier.png">
+                   Informations personnelle</span>
+               
+                     <ul>
+                        <li class="li-step5" *ngFor="let item of selectedObjectives2 | keyvalue">
+                           <span class="key">{{ item.key }} :</span> <span>{{ item.value }}</span> 
+            
+            
+                        </li>
+            
+                     </ul>
+               
+               
+                   </div>
+          
+             </div>
+          
+          
+             <div class="panierr" *ngIf="panier.length>0">
+              <div class="panier-content">
+                 <h6>
+         
+                    <i class="fa fa-shopping-cart shop-i" aria-hidden="true"></i>
+                    <span class="panier-details-span">Ma sélection ({{panier.length}})</span>
+         
+                 </h6>
+         
+                 <a class="del-panier" (click)="Modifier('Ma sélection')">Modifier</a>
+              </div>
+         
+              <div *ngFor="let item of panier">
+               <div class="item-container">
+                 <img [src]="item.image" width="50" class="img-panier">
+                 <div class="item-details">
+         
+                <span class="item-name">{{item.name}}</span> <br>
+                 <div class="qnt-div"> <span class="qnt-span"> Quantité: {{item.Quantite}}</span></div>
+                 </div>
+                 </div>
+                 <a  class="ret-btn" (click)="RetirerDiagnostic(item.name)">Retirer</a>
+                 <hr class="hr-panier">
+              </div>
+              
+           </div>
+          
+          
+          
+          </div>
+                                    
+          
+
+          <div class="button-group">
+            <div>
+            <button type="button" class="uk-button uk-button-primary" (click)="goBack()" [disabled]="step === 1" >Précédent</button></div>
+            <button type="button" class="uk-button uk-button-primary" *ngIf="step<=3" (click)="nextStep()" >Continuer</button>
+            <button *ngIf="step===4" type="button" class="uk-button uk-button-primary" (click)="sendMail()">Demander un devis</button>
+
+        </div>
+          
+      </div>
+  </div>
+</section>
+<!-- End Contact Area -->

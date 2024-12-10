@@ -1,0 +1,199 @@
+#logo{
+ width: 140px;  
+}
+// .location{
+//     transform: translateX(-20%);
+// }
+    .footer-column a {
+        color: rgb(226, 222, 222);
+        transition: color 0.3s ease;
+    }
+    
+    .footer-column a:hover {
+        color: #8cbe23; /* Change color on hover */
+    }
+    
+    .footer-column a:active {
+        color: #8cbe23; /* Change color when the link is active (clicked) */
+    }
+    
+    .footer-column a:focus {
+        color: #8cbe23; /* Change color when the link is focused */
+    }
+    #footer {
+        background-color: #1a1a2e; /* Dark background */
+        color: #ffffff; /* White text */
+        padding: 40px 40px 40px 60px; /* Increase left padding */
+      }
+      
+      .footer-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+      }
+      
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .footer-logo {
+        width: 150px; /* Adjust as needed */
+        margin-bottom: 20px;
+      }
+      
+      
+     
+      .bar {
+        position: relative;
+        z-index: 1;
+        background: #8cbe23;
+        width: 55px;
+        height: 3px;
+        margin: {
+          top: 12px;
+        }
+        transition: 0.5s;
+    
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 3px;
+          top: 0;
+          background: #ffffff;
+          transition:  0.5s;
+        }
+        &::after {
+          right: 10px;
+        }
+        &::before {
+          right: 20px;
+        }
+      }
+      .barr {
+        position: relative;
+        z-index: 1;
+        background: #8cbe23;
+        width: 170px;
+        height: 3px;
+        margin: {
+          top: 12px;
+        }
+        transition: 0.5s;
+    
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 3px;
+          top: 0;
+          background: #ffffff;
+          transition:  0.5s;
+        }
+        &::after {
+          right: 10px;
+        }
+        &::before {
+          right: 20px;
+        }
+      }
+      .bare {
+        position: relative;
+        z-index: 1;
+        background: #8cbe23;
+        width: 1200px;
+        height: 3px;
+        margin: {
+          top: 2px;
+          bottom:  60px;
+        }
+        transition: 0.5s;
+    
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 3px;
+          top: 0;
+          background: #ffffff;
+          transition:  0.5s;
+        }
+        &::after {
+          right: 10px;
+        }
+        &::before {
+          right: 20px;
+        }
+      }
+      #footer p, #footer a {
+        font-size: 14px;
+ 
+        margin: 5px 0;
+        text-decoration: none;
+      }
+      #hh3{margin-bottom: 40px;}
+      h3 {
+        margin: 0;
+        margin-top: -5px;
+        color: #ffffff;
+        font: {
+          size: 18px;
+          weight: 700;
+        }
+      }
+      
+      .footer-container {
+        margin-bottom: 60px; /* Adjust this value for spacing between sections */
+      }
+      @media screen and (min-width: 600px) and (max-width: 1024px) {
+        .bare{
+          width:60px
+        }
+      }
+      @media (max-width: 992px) {
+        .footer-container {
+            gap: 10px;
+            padding: 20px 10px;
+        }
+        
+        /* Stacking columns vertically on medium screens */
+        .footer-column {
+            flex: 1 1 48%; /* 2 columns per row */
+        }
+        .bare{
+          width:60px
+        }
+    }
+    
+    /* For mobile screens (small screens) */
+    @media (max-width: 768px) {
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    
+        .footer-column {
+            flex: 1 1 100%; /* Full-width columns */
+            min-width: unset; /* Remove minimum width */
+        }
+        .bare{
+          width:240px
+        }
+        .footer-logo {
+            width: 120px; /* Reduce logo size */
+        }
+    
+        .footer-column a {
+            font-size: 12px; /* Adjust font size for mobile */
+        }
+    
+        .copyright-area {
+            font-size: 12px;
+            padding: 10px 0;
+        }
+    }

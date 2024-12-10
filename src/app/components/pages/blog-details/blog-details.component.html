@@ -1,0 +1,1942 @@
+
+<section class="page-title-area uk-section uk-funfacts sec11">
+   <div class="overlay"></div>
+   <div class="uk-container">
+       <div class="text-content">
+           <h1 class="h1-sec11">Obtenez un devis rapide</h1>
+           <h5><p class="p-sec11">DIAGNOSTICS IMMOBILIERS À PARIS ET DANS TOUTE LA FRANCE</p></h5>
+           <a routerLink="/une-question" class="uk-button uk-button-default">UNE QUESTION ?</a>
+       </div>
+   </div>
+</section>
+
+<!-- Start Contact Area -->
+<section id="contact" class="contact-area uk-contact uk-section">
+   <div class="uk-container">
+       <div class="item">
+
+       <div class="uk-section-title section-title">
+           <h3>Diagnostics Vente & Location</h3>
+
+           <span>{{step}}/5</span>
+                   
+       <!-- Progress Bar -->
+       <div class="progress-bar">
+           <div class="progress-step active" [style.width]="progressWidth + '%'"></div>
+         
+       </div>
+       
+           <p *ngIf="step===1">Votre projet</p>
+           <p  *ngIf="step===2">Votre bien</p>
+           <p  *ngIf="step===3">Diagnostics</p>
+           <p  *ngIf="step===4">Informations personnelles</p>
+           <p  *ngIf="step===5">Votre panier</p>
+
+
+       </div>
+   
+
+
+       <div id="contactForm" *ngIf="step === 1">
+
+           <h6 class="h6-project"><span class="span-project">1</span> Votre projet</h6>
+         
+           <div class="message-box">
+             <i class="fas fa-info-circle"></i>
+             Afin d'obtenir la liste des diagnostics obligatoires pour la vente ou la location de votre bien, veuillez svp répondre aux questions suivantes
+           </div>
+
+           
+         
+           <h5>Quel est votre objectif ?</h5>
+           <form #form="ngForm"  novalidate>
+            <!-- Objective buttons for Location and Vente -->
+            <div class="objective-buttons">
+              <a class="objective-button"
+                 [ngClass]="{'active': selectedObjectives['Objectif'] === 'Location'}"
+                 (click)="setActive('Objectif', 'Location')">
+                Location 
+                <span *ngIf="selectedObjectives['Objectif'] === 'Location'" class="check-icon">✔</span>
+              </a>
+              <a class="objective-button"
+                 [ngClass]="{'active': selectedObjectives['Objectif'] === 'Vente'}"
+                 (click)="setActive('Objectif', 'Vente')">
+                Vente
+                <span *ngIf="selectedObjectives['Objectif'] === 'Vente'" class="check-icon">✔</span>
+              </a>
+            </div>
+          
+            <!-- Error message for invalid selection -->
+            <div *ngIf="showError2" class="error">
+              <small>Veuillez sélectionner un objectif : Location ou Vente.</small>
+            </div>
+          </form>
+          
+      
+          <form novalidate>
+            <!-- Adresse du bien -->
+             <h5>Quelle est l'adresse du bien ?</h5>
+            <input type="text" class="uk-input" 
+                   [(ngModel)]="selectedObjectives['Adresse du bien']" 
+                   (ngModelChange)="setActive('Adresse du bien', $event)" 
+                   name="adresseDuBien" 
+                   #adresseDuBien="ngModel" 
+                   required>
+          <div *ngIf="adresseDuBien.invalid && (adresseDuBien.dirty || adresseDuBien.touched)" class="error">
+              <small *ngIf="adresseDuBien.errors?.required">L'adresse du bien est obligatoire.</small>
+            </div>
+          
+            <!-- Code postal -->
+            <h5>Code postal</h5>
+            <input type="text" class="uk-input" 
+                   [(ngModel)]="selectedObjectives['Commune (code postal)']" 
+                   (ngModelChange)="setActive('Commune (code postal)', $event)" 
+                   name="commune" 
+                   #commune="ngModel" 
+                   required pattern="^[0-9]{5}$">
+                   <div *ngIf="commune.invalid && (commune.dirty || commune.touched)" class="error">
+                    <small *ngIf="commune.errors?.required">Le code postal est obligatoire.</small>
+                    <small *ngIf="commune.errors?.pattern">Le code postal doit être composé de 5 chiffres.</small>
+                  </div>
+          
+            <!-- Error message for invalid selection -->
+      
+    
+          </form>
+          
+          
+         
+           <h5>Quel est le type du bien ?</h5>
+           <div class="property-types">
+             <div class="property-type objective-button"  
+                  [ngClass]="{'active': selectedObjectives['Type de bien'] === 'Appartement'}"  
+                  (click)="setActive('Type de bien', 'Appartement')">
+               <img src="/assets/image/appartement.png"><br> Appartement 
+               <span *ngIf="selectedObjectives['Type de bien'] === 'Appartement'" class="check-icon">✔</span>
+             </div>
+             <div class="property-type objective-button"  
+                  [ngClass]="{'active': selectedObjectives['Type de bien'] === 'Maison'}"  
+                  (click)="setActive('Type de bien', 'Maison')">
+               <img src="/assets/image/maison.png"><br> Maison 
+               <span *ngIf="selectedObjectives['Type de bien'] === 'Maison'" class="check-icon">✔</span>
+             </div>
+
+
+             <div class="property-type objective-button"  
+                  [ngClass]="{'active': selectedObjectives['Type de bien'] === 'Immeuble collectif'}"  
+                  (click)="setActive('Type de bien', 'Immeuble collectif')">
+               <img src="/assets/image/immeuble.png"><br> Immeuble collectif 
+               <span *ngIf="selectedObjectives['Type de bien'] === 'Immeuble collectif'" class="check-icon">✔</span>
+             </div>
+             <div class="property-type objective-button"  
+                  [ngClass]="{'active': selectedObjectives['Type de bien'] === 'Local professionnel'}"  
+                  (click)="setActive('Type de bien', 'Local professionnel')">
+               <img src="/assets/image/office-building.png"><br> Local professionnel 
+               <span *ngIf="selectedObjectives['Type de bien'] === 'Local professionnel'" class="check-icon">✔</span>
+             </div>
+             <div class="property-type objective-button"  
+                  [ngClass]="{'active': selectedObjectives['Type de bien'] === 'Parking'}"  
+                  (click)="setActive('Type de bien', 'Parking')">
+               <img src="/assets/image/parking.png"><br> Parking 
+               <span *ngIf="selectedObjectives['Type de bien'] === 'Parking'" class="check-icon">✔</span>
+             </div>
+             <div class="property-type objective-button"  
+                  [ngClass]="{'active': selectedObjectives['Type de bien'] === 'Cave'}"  
+                  (click)="setActive('Type de bien', 'Cave')">
+               <img src="/assets/image/cave.png"><br> Cave 
+               <span *ngIf="selectedObjectives['Type de bien'] === 'Cave'" class="check-icon">✔</span>
+             </div>
+
+
+             <div class="property-type objective-button"  *ngIf="selectedObjectives['Objectif'] === 'Vente'" 
+             [ngClass]="{'active': selectedObjectives['Type de bien'] === 'terrain'}"  
+             (click)="setActive('Type de bien', 'terrain')">
+          <img src="/assets/image/terrain.png"><br> Terrain 
+          <span *ngIf="selectedObjectives['Type de bien'] === 'terrain'" class="check-icon">✔</span>
+        </div>
+
+        <div *ngIf="showError2" class="error">
+          <small>  Ce champ est obligatoire</small>
+        </div>
+           </div>
+
+        
+         
+           <div *ngIf="selectedObjectives['Type de bien'] === 'Local professionnel'">
+              <h5>Type de local professionnel</h5>
+            
+              <div class="custom-dropdown">
+                <select 
+                  class="modern-select" 
+                  (change)="onSelectionChange($event)">
+                  <option value="" disabled selected>Select an option</option>
+                  <option 
+                    *ngFor="let option of options" 
+                    [value]="option"
+                    [ngClass]="{'active': selectedObjectives['local'] === option}">
+                    {{ option }}
+                  </option>
+                </select>
+                <div  class="error">
+                  <small *ngIf="errorFlags.local">Please select a valid option.</small>
+                </div>
+              </div>
+            </div>
+       
+            <form #form="ngForm"  novalidate>
+
+              <!-- Conditional Display of 'Autre local professionnel' -->
+              <div *ngIf="selectedObjectives['local'] === 'Autre' && selectedObjectives['Type de bien'] === 'Local professionnel'">
+                <h5>Autre local professionnel</h5>
+                <input type="text" 
+                       class="uk-input" 
+                       [(ngModel)]="selectedObjectives['Autre local professionnel']" 
+                       (ngModelChange)="setActive('Autre local professionnel', $event)" 
+                       #autreLocal="ngModel" 
+                       name="autreLocal" 
+                       required>
+                <div *ngIf="autreLocal.invalid && (autreLocal.dirty || autreLocal.touched)" class="error">
+                  <small *ngIf="autreLocal.errors?.required">L'information sur l'autre local est obligatoire.</small>
+                </div>
+              </div>
+            </form>
+            
+            <div id="error" *ngIf="showError2" class="error-message">
+              <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+              Veuillez remplir tous les champs requis.
+          </div>
+
+            
+  
+
+         </div>
+
+
+     
+<div id="contactForm" *ngIf="step === 2">
+  <h6 class="h6-project"><span class="span-project">2</span> Votre bien</h6>
+
+  <div class="message-box">
+    <i class="fas fa-info-circle"></i>
+    Afin d'obtenir la liste des diagnostics obligatoires pour la vente ou la location de votre bien, veuillez svp répondre aux questions suivantes
+  </div>
+
+
+
+
+  <div *ngIf="selectedObjectives['Type de bien'] === 'Appartement'">
+
+
+    <form  novalidate>
+    
+    <!-- Surface du bien -->
+    <h5>Surface du bien (approx. en m²)</h5>
+    <input type="number" 
+           class="uk-input" 
+           min="1" 
+           [(ngModel)]="selectedObjectives2['Surface du bien (approx. en m²)']" 
+           (ngModelChange)="setActive('Surface du bien (approx. en m²)', $event)" 
+           #surfaceDuBien="ngModel" 
+           name="surfaceDuBien" 
+           required>
+
+    <h5>Nombre de place(s) de Parking</h5>
+    <input
+    type="number"
+    class="uk-input"
+    min="0"
+    [(ngModel)]="selectedObjectives2['Nombre de place(s) de Parking']"
+    (ngModelChange)="setActive('Nombre de place(s) de Parking', $event)"
+    #placesDeParking="ngModel"
+    name="placesDeParking"
+    [ngModel]="selectedObjectives2['Nombre de place(s) de Parking'] || 0"
+   
+  >
+  
+  
+    <!-- Nombre de places de parking -->
+    
+  </form>
+  <h5>Y a-t-il une cave ?</h5>
+  <div class="objective-buttons">
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['cave'] === 'Oui'}" 
+       (click)="setActive('cave', 'Oui')">
+       Oui <span *ngIf="selectedObjectives2['cave'] === 'Oui'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['cave'] === 'Non'}" 
+       (click)="setActive('cave', 'Non')">
+       Non <span *ngIf="selectedObjectives2['cave'] === 'Non'" class="check-icon">✔</span>
+    </a>
+  </div>
+  <div *ngIf="showError3" class="error-message">
+    <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">  Veuillez sélectionner un objectif :Oui ou Non
+  </div>
+  <h5>Quelle est la date de construction du bien ?</h5>
+  <div class="objective-buttons">
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant 1949'}" 
+       (click)="setActive('Date de construction', 'Avant 1949')">
+       Avant 1949 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant 1949'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'}" 
+       (click)="setActive('Date de construction', 'De 1949 au 1er Juillet 1997')">
+       De 1949 au 1er Juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+       (click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+       Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+    </a>
+  </div>
+  <div *ngIf="showError3" class="error-message">
+    <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">  Ce champ est obligatoires
+  </div>
+  <div *ngIf="selectedObjectives2['Date de construction'] !== 'Aprés le 1er juillet 1997' && selectedObjectives2['Date de construction'] !==undefined ">
+    <h5>Y a-t-il une installation gaz ?</h5>
+    <div class="objective-buttons">
+      <a class="objective-button" 
+         [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'}" 
+         (click)="setActive('Y a-t-il une installation gaz ?', 'oui')">
+         Oui <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'" class="check-icon">✔</span>
+      </a>
+      <a class="objective-button" 
+         [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'}" 
+         (click)="setActive('Y a-t-il une installation gaz ?', 'Pas dinstallation')">
+         Pas d'installation <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'" class="check-icon">✔</span>
+      </a>
+    </div>
+   
+  </div>
+ 
+  <div *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'">
+
+  <h5>Le permis de construire date-t-il de moins de 15 ans ?</h5>
+  <div class="objective-buttons">
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'}" 
+       (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'oui')">
+       Oui <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'}" 
+       (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'non')">
+       Non <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'}" 
+       (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'Je ne sais pas')">
+       Je ne sais pas <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'" class="check-icon">✔</span>
+    </a>
+  </div>
+</div>
+
+<div *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non' || selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas' ">
+<h5>Y a-t-il une installation gaz ?</h5>
+<div class="objective-buttons">
+  <a class="objective-button" 
+     [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'}" 
+     (click)="setActive('Y a-t-il une installation gaz ?', 'oui')">
+     Oui <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'" class="check-icon">✔</span>
+  </a>
+  <a class="objective-button" 
+     [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'}" 
+     (click)="setActive('Y a-t-il une installation gaz ?', 'Pas dinstallation')">
+     Pas d'installation <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'" class="check-icon">✔</span>
+  </a>
+</div>
+
+
+</div>
+
+<div *ngIf="selectedObjectives['Objectif'] === 'Vente'">
+  <h5>Avez-vous besoin d'un diagnostic assainissement ? </h5>
+  <div class="objective-buttons">
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'oui'}" 
+       (click)="setActive('Assainissement', 'oui')">
+       Oui <span *ngIf="selectedObjectives2['Assainissement'] === 'oui'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'non'}" 
+       (click)="setActive('Assainissement', 'non')">
+       Non <span *ngIf="selectedObjectives2['Assainissement'] === 'non'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'Je ne sais pas'}" 
+       (click)="setActive('Assainissement', 'Je ne sais pas')">
+       Je ne sais pas <span *ngIf="selectedObjectives2['Assainissement'] === 'Je ne sais pas'" class="check-icon">✔</span>
+    </a>
+  </div>
+</div>
+<div id="error" *ngIf="errorMessage" class="error-message">
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">  {{ errorMessage }}
+</div>
+</div>
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Maison' && selectedObjectives['Objectif'] === 'Location'" >
+  
+  <form #form="ngForm" novalidate>
+
+    <!-- Surface du bien -->
+    <h5>Surface du bien (approx. en m²)</h5>
+    <input type="number" 
+           class="uk-input" 
+           min="0" 
+           oninput="this.value = Math.max(this.value, 0)" 
+           [(ngModel)]="selectedObjectives2['Surface du bien (approx. en m²)']" 
+           (ngModelChange)="setActive('Surface du bien (approx. en m²)', $event)" 
+           #surfaceDuBien="ngModel" 
+           name="surfaceDuBien" 
+           required>
+        
+           </form>
+
+
+  <h5>Quelle est la date de construction du bien ?</h5>
+  <div class="objective-buttons">
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant 1949'}" 
+       (click)="setActive('Date de construction', 'Avant 1949')">
+       Avant 1949 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant 1949'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'}" 
+       (click)="setActive('Date de construction', 'De 1949 au 1er Juillet 1997')">
+       De 1949 au 1er Juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+       (click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+       Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+    </a>
+  </div>
+
+   <div *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'">
+
+     <h5>Le permis de construire date-t-il de moins de 15 ans ?</h5>
+     <div class="objective-buttons">
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'}" 
+          (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'oui')">
+          Oui <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'}" 
+          (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'non')">
+          Non <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'}" 
+          (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'Je ne sais pas')">
+          Je ne sais pas <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'" class="check-icon">✔</span>
+       </a>
+     </div>
+   </div>
+
+   <div *ngIf="selectedObjectives2['Date de construction'] !== 'Aprés le 1er juillet 1997' && selectedObjectives2['Date de construction'] !== undefined || (selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non' || selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas')">
+     <h5>Y a-t-il une installation gaz ?</h5>
+     <div class="objective-buttons">
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'}" 
+          (click)="setActive('Y a-t-il une installation gaz ?', 'oui')">
+          Oui <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'}" 
+          (click)="setActive('Y a-t-il une installation gaz ?', 'Pas dinstallation')">
+          Pas d'installation <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'" class="check-icon">✔</span>
+       </a>
+     </div>
+   </div>
+   <div id="error" *ngIf="errorMessage" class="error-message">
+    <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+    {{ errorMessage }}
+  </div>
+
+
+</div>
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Maison' && selectedObjectives['Objectif'] === 'Vente'" >
+
+  <h5>Surface du bien (approx. en m²)</h5>
+  <input type="number" class="uk-input"   min="0"  oninput="this.value = Math.max(this.value, 0)" [(ngModel)]="selectedObjectives2['Surface du bien (approx. en m²)']" 
+  (ngModelChange)="setActive('Surface du bien (approx. en m²)', $event)">
+
+  <h5>Quelle est la date de construction du bien ?</h5>
+  <div class="objective-buttons">
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant 1949'}" 
+       (click)="setActive('Date de construction', 'Avant 1949')">
+       Avant 1949 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant 1949'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'}" 
+       (click)="setActive('Date de construction', 'De 1949 au 1er Juillet 1997')">
+       De 1949 au 1er Juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'" class="check-icon">✔</span>
+    </a>
+    <a class="objective-button" 
+       [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+       (click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+       Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+    </a>
+  </div>
+
+
+
+
+   <div *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'">
+
+     <h5>Le permis de construire date-t-il de moins de 15 ans ?</h5>
+     <div class="objective-buttons">
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'}" 
+          (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'oui')">
+          Oui <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'}" 
+          (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'non')">
+          Non <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'}" 
+          (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'Je ne sais pas')">
+          Je ne sais pas <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'" class="check-icon">✔</span>
+       </a>
+     </div>
+   </div>
+  
+
+
+   <div *ngIf="selectedObjectives2['Date de construction'] !== 'Aprés le 1er juillet 1997' && selectedObjectives2['Date de construction'] !== undefined || (selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non' || selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas')">
+     <h5>Y a-t-il une installation gaz ?</h5>
+     <div class="objective-buttons">
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'}" 
+          (click)="setActive('Y a-t-il une installation gaz ?', 'oui')">
+          Oui <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'}" 
+          (click)="setActive('Y a-t-il une installation gaz ?', 'Pas dinstallation')">
+          Pas d'installation <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'" class="check-icon">✔</span>
+       </a>
+     </div>
+   </div>
+
+   <div>
+
+     <h5>La maison est-elle en copropriété ?</h5>
+     <div class="objective-buttons">
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['La maison est-elle en copropriété ?'] === 'oui'}" 
+          (click)="setActive('La maison est-elle en copropriété ?', 'oui')">
+          Oui <span *ngIf="selectedObjectives2['La maison est-elle en copropriété ?'] === 'oui'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['La maison est-elle en copropriété ?'] === 'non'}" 
+          (click)="setActive('La maison est-elle en copropriété ?', 'non')">
+          Non <span *ngIf="selectedObjectives2['La maison est-elle en copropriété ?'] === 'non'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['La maison est-elle en copropriété ?'] === 'Je ne sais pas'}" 
+          (click)="setActive('La maison est-elle en copropriété ?', 'Je ne sais pas')">
+          Je ne sais pas <span *ngIf="selectedObjectives2['La maison est-elle en copropriété ?'] === 'Je ne sais pas'" class="check-icon">✔</span>
+       </a>
+     </div>
+   </div>
+
+
+   <div>
+     <h5>Avez-vous besoin d'un diagnostic assainissement ? </h5>
+     <div class="objective-buttons">
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'oui'}" 
+          (click)="setActive('Assainissement', 'oui')">
+          Oui <span *ngIf="selectedObjectives2['Assainissement'] === 'oui'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'non'}" 
+          (click)="setActive('Assainissement', 'non')">
+          Non <span *ngIf="selectedObjectives2['Assainissement'] === 'non'" class="check-icon">✔</span>
+       </a>
+       <a class="objective-button" 
+          [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'Je ne sais pas'}" 
+          (click)="setActive('Assainissement', 'Je ne sais pas')">
+          Je ne sais pas <span *ngIf="selectedObjectives2['Assainissement'] === 'Je ne sais pas'" class="check-icon">✔</span>
+       </a>
+     </div>
+   </div>
+
+   <div id="error" *ngIf="errorMessage" class="error-message">
+    <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+    {{ errorMessage }}
+  </div>
+
+</div>
+
+
+
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Immeuble collectif' && selectedObjectives['Objectif'] === 'Location'" >
+  
+  <form #form="ngForm"  novalidate>
+
+    <!-- Surface du bien -->
+    <h5>Surface du bien (approx. en m²)</h5>
+    <input type="number" 
+           class="uk-input" 
+           min="0" 
+           oninput="this.value = Math.max(this.value, 0)" 
+           [(ngModel)]="selectedObjectives2['Surface du bien (approx. en m²)']" 
+           (ngModelChange)="setActive('Surface du bien (approx. en m²)', $event)" 
+           #surfaceDuBien="ngModel" 
+           name="surfaceDuBien" 
+           required>
+    <div *ngIf="surfaceDuBien.invalid && (surfaceDuBien.dirty || surfaceDuBien.touched)" class="error">
+      <small *ngIf="surfaceDuBien.errors?.required">La surface du bien est obligatoire.</small>
+    </div>
+  
+    <!-- Nombre d'appartements -->
+    <div class="step2-nbrAppart">
+      <div>
+        <h5>Nombre d'appartements</h5>
+        <input type="number" 
+               class="uk-input" 
+               min="1" 
+               oninput="this.value = Math.max(this.value, 1)" 
+               [(ngModel)]="selectedObjectives2['Nombre dappartements']" 
+               (ngModelChange)="setActive('Nombre dappartements', $event)" 
+               #nombreAppartements="ngModel" 
+               name="nombreAppartements" 
+               required>
+      
+      </div>
+  
+      <!-- Nombre de locaux commerciaux -->
+      <div>
+        <h5>Nombre de locaux commerciaux</h5>
+        <input type="number" 
+               class="uk-input" 
+               min="0" 
+               oninput="this.value = Math.max(this.value, 0)" 
+               [(ngModel)]="selectedObjectives2['Nombre de locaux commerciaux']" 
+               (ngModelChange)="setActive('Nombre de locaux commerciaux', $event)" 
+               #locauxCommerciaux="ngModel" 
+               name="locauxCommerciaux" 
+               required>
+        <div *ngIf="locauxCommerciaux.invalid && (locauxCommerciaux.dirty || locauxCommerciaux.touched)" class="error">
+          <small *ngIf="locauxCommerciaux.errors?.required">Le nombre de locaux commerciaux est obligatoire.</small>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Nombre de place(s) de Parking -->
+    <h5>Nombre de place(s) de Parking</h5>
+    <input
+    type="number"
+    class="uk-input"
+    min="0"
+    [(ngModel)]="selectedObjectives2['Nombre de place(s) de Parking']"
+    (ngModelChange)="setActive('Nombre de place(s) de Parking', $event)"
+    #placesDeParking="ngModel"
+    name="placesDeParking"
+    [ngModel]="selectedObjectives2['Nombre de place(s) de Parking'] || 0"
+    
+  >
+  
+ 
+  
+
+  </form>
+  
+
+<h5>Y a-t-il une cave ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['cave'] === 'Oui'}" 
+(click)="setActive('cave', 'Oui')">
+Oui <span *ngIf="selectedObjectives2['cave'] === 'Oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['cave'] === 'Non'}" 
+(click)="setActive('cave', 'Non')">
+Non <span *ngIf="selectedObjectives2['cave'] === 'Non'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+
+<h5>Quelle est la date de construction du bien ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant 1949'}" 
+(click)="setActive('Date de construction', 'Avant 1949')">
+Avant 1949 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant 1949'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'}" 
+(click)="setActive('Date de construction', 'De 1949 au 1er Juillet 1997')">
+De 1949 au 1er Juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+(click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+
+
+<div *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'">
+
+<h5>Le permis de construire date-t-il de moins de 15 ans ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'}" 
+ (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'oui')">
+ Oui <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'}" 
+ (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'non')">
+ Non <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'}" 
+ (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'Je ne sais pas')">
+ Je ne sais pas <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'" class="check-icon">✔</span>
+</a>
+</div>
+</div>
+
+<div *ngIf="selectedObjectives2['Date de construction'] !== 'Aprés le 1er juillet 1997' && selectedObjectives2['Date de construction'] !== undefined || (selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non' || selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas')">
+<h5>Y a-t-il une installation gaz ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'}" 
+ (click)="setActive('Y a-t-il une installation gaz ?', 'oui')">
+ Oui <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'}" 
+ (click)="setActive('Y a-t-il une installation gaz ?', 'Pas dinstallation')">
+ Pas d'installation <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'" class="check-icon">✔</span>
+</a>
+</div>
+</div>
+
+
+
+<div id="error" *ngIf="errorMessage" class="error-message">
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+  {{ errorMessage }}
+</div>
+</div>
+
+
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Immeuble collectif' && selectedObjectives['Objectif'] === 'Vente'" >
+  
+  <h5>Surface du bien (approx. en m²)</h5>
+  <input type="number" class="uk-input"       min="0"  oninput="this.value = Math.max(this.value, 0)" [(ngModel)]="selectedObjectives2['Surface du bien (approx. en m²)']" 
+  (ngModelChange)="setActive('Surface du bien (approx. en m²)', $event)">
+
+<div class="step2-nbrAppart">
+<div>
+<h5>Nombre d'appartements</h5>
+<input type="number" class="uk-input"       min="1"  oninput="this.value = Math.max(this.value, 1)" [(ngModel)]="selectedObjectives2['Nombre dappartements']" 
+(ngModelChange)="setActive('Nombre dappartements', $event)">
+</div>
+<div>
+<h5>Nombre de locaux commerciaux</h5>
+<input type="number" class="uk-input"       min="0"  oninput="this.value = Math.max(this.value, 0)" [(ngModel)]="selectedObjectives2['Nombre de locaux commerciaux']" 
+(ngModelChange)="setActive('Nombre de locaux commerciaux', $event)">
+</div>
+</div>
+
+
+<h5>Souhaitez-vous un dossier unique ou un par appartement/local commercial ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Un dossier unique ou un par appartement/local commercial ?'] === 'Un seul dossier'}" 
+(click)="setActive('Un dossier unique ou un par appartement/local commercial ?', 'Un seul dossier')">
+Un seul dossier <span *ngIf="selectedObjectives2['Un dossier unique ou un par appartement/local commercial ?'] === 'Un seul dossier'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Un dossier unique ou un par appartement/local commercial ?'] === 'Un dossier par appartement/local commercial'}" 
+(click)="setActive('Un dossier unique ou un par appartement/local commercial ?', 'Un dossier par appartement/local commercial')">
+Un dossier par appartement/local commercial <span *ngIf="selectedObjectives2['Un dossier unique ou un par appartement/local commercial ?'] === 'Un dossier par appartement/local commercial'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+<h5>Nombre de place(s) de Parking</h5>
+<input
+  type="number"
+  class="uk-input"
+  min="0"
+  [(ngModel)]="selectedObjectives2['Nombre de place(s) de Parking']"
+  (ngModelChange)="setActive('Nombre de place(s) de Parking', $event)"
+  #placesDeParking="ngModel"
+  name="placesDeParking"
+  [ngModel]="selectedObjectives2['Nombre de place(s) de Parking'] || 0"
+  
+>
+
+
+
+
+
+
+
+<h5>Y a-t-il une cave ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['cave'] === 'Oui'}" 
+(click)="setActive('cave', 'Oui')">
+Oui <span *ngIf="selectedObjectives2['cave'] === 'Oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['cave'] === 'Non'}" 
+(click)="setActive('cave', 'Non')">
+Non <span *ngIf="selectedObjectives2['cave'] === 'Non'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+
+<h5>Quelle est la date de construction du bien ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant 1949'}" 
+(click)="setActive('Date de construction', 'Avant 1949')">
+Avant 1949 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant 1949'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'}" 
+(click)="setActive('Date de construction', 'De 1949 au 1er Juillet 1997')">
+De 1949 au 1er Juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+(click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+
+
+<div *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'">
+
+<h5>Le permis de construire date-t-il de moins de 15 ans ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'}" 
+ (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'oui')">
+ Oui <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'}" 
+ (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'non')">
+ Non <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'}" 
+ (click)="setActive('Le permis de construire date-t-il de moins de 15 ans ?', 'Je ne sais pas')">
+ Je ne sais pas <span *ngIf="selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas'" class="check-icon">✔</span>
+</a>
+</div>
+</div>
+
+<div *ngIf="selectedObjectives2['Date de construction'] !== 'Aprés le 1er juillet 1997' && selectedObjectives2['Date de construction'] !== undefined || (selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'non' || selectedObjectives2['Le permis de construire date-t-il de moins de 15 ans ?'] === 'Je ne sais pas')">
+<h5>Y a-t-il une installation gaz ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'}" 
+ (click)="setActive('Y a-t-il une installation gaz ?', 'oui')">
+ Oui <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'}" 
+ (click)="setActive('Y a-t-il une installation gaz ?', 'Pas dinstallation')">
+ Pas d'installation <span *ngIf="selectedObjectives2['Y a-t-il une installation gaz ?'] === 'Pas dinstallation'" class="check-icon">✔</span>
+</a>
+</div>
+</div>
+
+
+<h5>Avez-vous besoin d'un diagnostic assainissement ? </h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Assainissement'] === 'oui'}" 
+(click)="setActive('Assainissement', 'oui')">
+Oui <span *ngIf="selectedObjectives2['Assainissement'] === 'oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Assainissement'] === 'non'}" 
+(click)="setActive('Assainissement', 'non')">
+Non <span *ngIf="selectedObjectives2['Assainissement'] === 'non'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Assainissement'] === 'Je ne sais pas'}" 
+(click)="setActive('Assainissement', 'Je ne sais pas')">
+Je ne sais pas <span *ngIf="selectedObjectives2['Assainissement'] === 'Je ne sais pas'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+<div id="error" *ngIf="errorMessage" class="error-message">
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+  {{ errorMessage }}
+</div>
+</div>
+
+
+
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Local professionnel' && selectedObjectives['local'] === 'Commerce' || selectedObjectives['local'] === 'Bureaux' || selectedObjectives['local'] === 'Atelier'  || selectedObjectives['local'] === 'Entrepot'  || selectedObjectives['local'] === 'Batiment industriel'  || selectedObjectives['local'] === 'Autre'">
+  
+  <form #form="ngForm"  novalidate>
+
+    <!-- Surface du bien -->
+    <h5>Surface du bien (approx. en m²)</h5>
+    <input type="number" 
+           class="uk-input" 
+           min="0" 
+           oninput="this.value = Math.max(this.value, 0)" 
+           [(ngModel)]="selectedObjectives2['Surface du bien (approx. en m²)']" 
+           (ngModelChange)="setActive('Surface du bien (approx. en m²)', $event)" 
+           #surfaceDuBien="ngModel" 
+           name="surfaceDuBien" 
+           required>
+    <div *ngIf="surfaceDuBien.invalid && (surfaceDuBien.dirty || surfaceDuBien.touched)" class="error">
+      <small *ngIf="surfaceDuBien.errors?.required">La surface du bien est obligatoire.</small>
+    </div></form>
+
+<h5>Quelle est la date de construction du bien ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant 1949'}" 
+(click)="setActive('Date de construction', 'Avant 1949')">
+Avant 1949 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant 1949'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'}" 
+(click)="setActive('Date de construction', 'De 1949 au 1er Juillet 1997')">
+De 1949 au 1er Juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+(click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+<div *ngIf="selectedObjectives['Objectif'] === 'Vente'">
+<h5>Avez-vous besoin d'un diagnostic assainissement ? </h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'oui'}" 
+ (click)="setActive('Assainissement', 'oui')">
+ Oui <span *ngIf="selectedObjectives2['Assainissement'] === 'oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'non'}" 
+ (click)="setActive('Assainissement', 'non')">
+ Non <span *ngIf="selectedObjectives2['Assainissement'] === 'non'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'Je ne sais pas'}" 
+ (click)="setActive('Assainissement', 'Je ne sais pas')">
+ Je ne sais pas <span *ngIf="selectedObjectives2['Assainissement'] === 'Je ne sais pas'" class="check-icon">✔</span>
+</a>
+</div>
+</div>
+<div id="error" *ngIf="errorMessage" class="error-message">
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;"> {{ errorMessage }}
+</div>
+
+</div>
+
+
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Local professionnel' && selectedObjectives['local'] === 'Hotel'">
+
+  <form #form="ngForm"  novalidate>
+
+    <!-- Surface du bien -->
+    <h5>Surface du bien (approx. en m²)</h5>
+    <input type="number" 
+           class="uk-input" 
+           min="0" 
+           oninput="this.value = Math.max(this.value, 0)" 
+           [(ngModel)]="selectedObjectives2['Surface du bien (approx. en m²)']" 
+           (ngModelChange)="setActive('Surface du bien (approx. en m²)', $event)" 
+           #surfaceDuBien="ngModel" 
+           name="surfaceDuBien" 
+           required>
+    <div *ngIf="surfaceDuBien.invalid && (surfaceDuBien.dirty || surfaceDuBien.touched)" class="error">
+      <small *ngIf="surfaceDuBien.errors?.required">La surface du bien est obligatoire.</small>
+    </div>
+<!-- Nombre de chambres au total -->
+<h5>Nombre de chambres au total</h5>
+<input type="number" 
+       class="uk-input" 
+       min="1" 
+       oninput="this.value = Math.max(this.value, 1)" 
+       [(ngModel)]="selectedObjectives2['Nombre de chambres au total']" 
+       (ngModelChange)="setActive('Nombre de chambres au total', $event)" 
+       #nombreChambres="ngModel" 
+       name="nombreChambres" 
+       required>
+<div *ngIf="nombreChambres.invalid && (nombreChambres.dirty || nombreChambres.touched)" class="error">
+  <small *ngIf="nombreChambres.errors?.required">Le nombre de chambres est obligatoire.</small>
+</div>
+</form>
+
+
+<h5>Quelle est la date de construction du bien ?</h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant 1949'}" 
+(click)="setActive('Date de construction', 'Avant 1949')">
+Avant 1949 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant 1949'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'}" 
+(click)="setActive('Date de construction', 'De 1949 au 1er Juillet 1997')">
+De 1949 au 1er Juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'De 1949 au 1er Juillet 1997'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+(click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+</a>
+</div>
+
+
+<div *ngIf="selectedObjectives['Objectif'] === 'Vente'">
+<h5>Avez-vous besoin d'un diagnostic assainissement ? </h5>
+<div class="objective-buttons">
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'oui'}" 
+ (click)="setActive('Assainissement', 'oui')">
+ Oui <span *ngIf="selectedObjectives2['Assainissement'] === 'oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'non'}" 
+ (click)="setActive('Assainissement', 'non')">
+ Non <span *ngIf="selectedObjectives2['Assainissement'] === 'non'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+ [ngClass]="{'active': selectedObjectives2['Assainissement'] === 'Je ne sais pas'}" 
+ (click)="setActive('Assainissement', 'Je ne sais pas')">
+ Je ne sais pas <span *ngIf="selectedObjectives2['Assainissement'] === 'Je ne sais pas'" class="check-icon">✔</span>
+</a>
+</div>
+</div>
+
+
+<div id="error" *ngIf="errorMessage" class="error-message">
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;"> {{ errorMessage }}
+</div>
+</div>
+
+
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Parking'">
+  <form #form="ngForm" novalidate >
+    
+    <!-- Input for Nombre de places de parking -->
+    <h5>Quel est le nombre de places de parking ?</h5>
+    <input type="number" 
+           class="uk-input" 
+           min="0" 
+           oninput="this.value = Math.max(this.value, 0)" 
+           [(ngModel)]="selectedObjectives2['Nombre de places de parking']" 
+           #parkingPlaces="ngModel" 
+           name="parkingPlaces" 
+           required>
+    
+    <!-- Dynamic Error Message -->
+
+
+    <!-- Date de construction Section -->
+    <h5>Quelle est la date de construction du bien ?</h5>
+    <div class="objective-buttons">
+      <a class="objective-button" 
+         [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant le 1er juillet 1997'}" 
+         (click)="setActive('Date de construction', 'Avant le 1er juillet 1997')">
+        Avant le 1er juillet 1997 
+        <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant le 1er juillet 1997'" class="check-icon">✔</span>
+      </a>
+      <a class="objective-button" 
+         [ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+         (click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+        Aprés le 1er juillet 1997 
+        <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+      </a>
+    </div>
+
+    <!-- Dynamic Error Message -->
+
+
+    <!-- Submit Button -->
+  </form>
+  <div id="error" *ngIf="errorMessage" class="error-message">
+    <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">  {{ errorMessage }}
+  </div>
+</div>
+
+
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'Cave'">
+
+  <form #form="ngForm"  novalidate>
+
+    <!-- Input for Nombre de caves -->
+    <h5>Quel est le nombre de caves ?</h5>
+    <input type="number" 
+           class="uk-input" 
+           min="1" 
+           oninput="this.value = Math.max(this.value, 1)" 
+           [(ngModel)]="selectedObjectives2['Nombre de caves']" 
+           (ngModelChange)="setActive('Nombre de caves', $event)" 
+           #caves="ngModel" 
+           name="caves" 
+           required>
+  
+
+
+  </form>
+  
+
+<h5>Quelle est la date de construction du bien ?</h5>
+<div class="objective-buttons">
+
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Avant le 1er juillet 1997'}" 
+(click)="setActive('Date de construction', 'Avant le 1er juillet 1997')">
+Avant le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Avant le 1er juillet 1997'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'}" 
+(click)="setActive('Date de construction', 'Aprés le 1er juillet 1997')">
+Aprés le 1er juillet 1997 <span *ngIf="selectedObjectives2['Date de construction'] === 'Aprés le 1er juillet 1997'" class="check-icon">✔</span>
+</a>
+</div>
+<div id="error" *ngIf="errorMessage" class="error-message">
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;"> {{ errorMessage }}
+</div>
+</div>
+
+
+<div *ngIf="selectedObjectives['Type de bien'] === 'terrain'">
+
+
+
+<h5>Surface du terrain (approx. en m²)</h5>
+<input type="number"      min="0"  oninput="this.value = Math.max(this.value, 0)" class="uk-input" [(ngModel)]="selectedObjectives2['Surface du terrain (approx. en m²)']" 
+(ngModelChange)="setActive('Surface du terrain (approx. en m²)', $event)">
+
+
+
+<h5>Y a-t-il la une construction sur le terrain ?</h5>
+<div class="objective-buttons">
+
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Construction sur le Terrain'] === 'Oui'}" 
+(click)="setActive('Construction sur le Terrain', 'Oui')">
+Oui <span *ngIf="selectedObjectives2['Construction sur le Terrain'] === 'Oui'" class="check-icon">✔</span>
+</a>
+<a class="objective-button" 
+[ngClass]="{'active': selectedObjectives2['Construction sur le Terrain'] === 'Non'}" 
+(click)="setActive('Construction sur le Terrain', 'Non')">
+Non <span *ngIf="selectedObjectives2['Construction sur le Terrain'] === 'Non'" class="check-icon">✔</span>
+</a>
+</div>
+
+<div *ngIf="selectedObjectives2['Construction sur le Terrain'] === 'Oui'">
+
+
+
+<h5>Surface de la construction (approx. en m²)</h5>
+<input type="number"      min="0"  oninput="this.value = Math.max(this.value, 0)" class="uk-input" [(ngModel)]="selectedObjectives2['Surface de la construction (approx. en m²)']" 
+(ngModelChange)="setActive('Surface de la construction (approx. en m²)', $event)">
+
+
+<h5>Type construction</h5>
+<div class="custom-dropdown">
+  <select 
+    class="modern-select" 
+    (change)="onSelectionChange2($event)">
+    <option value="" disabled selected>Select an option</option>
+    <option 
+      *ngFor="let option of optionsTypeConstruction" 
+      [value]="option"
+      [ngClass]="{'active': selectedObjectives2['Type_construction'] === option}">
+      {{ option }}
+    </option>
+  </select>
+</div>
+
+<div *ngIf="selectedObjectives2['Construction sur le Terrain'] === 'Oui'  && selectedObjectives2['Type_construction'] === 'Autre' ">
+  <h5>Description de la construction</h5>
+  <input type="text" class="uk-input" [(ngModel)]="selectedObjectives2['Description de la construction']" 
+    (ngModelChange)="setActive('Description de la construction', $event)">
+</div>
+
+</div>
+
+<div id="error" *ngIf="errorMessage" class="error-message">
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;"> {{ errorMessage }}
+</div>
+</div>
+
+
+</div> 
+         <div>
+       </div>
+<div id="contactForm" *ngIf="step === 3"  >
+
+  <h6 class="h6-project"><span class="span-project">3</span> Diagnostics</h6>
+         
+  <div class="message-box">
+    <i class="fas fa-info-circle"></i>
+    Les diagnostics obligatoires sont présélectionnés dans le panier.
+  </div>
+
+  <div class="panier-box" *ngIf="panier.length>0">
+     <div class="panier-box2">
+        <h5 class="h5-panier">
+           <i  class="fa fa-shopping-cart icon-panier" aria-hidden="true"></i>
+           Ma sélection ({{panier.length}})
+        </h5>
+        <a class="del-panier" (click)="viderPanier()">Vider le panier</a>
+     </div>
+     
+     <div *ngFor="let item of panier">
+           
+        <img [src]="item.image" width="50" class="img-panier">
+
+       <span class="item-name">{{item.name}}</span> <br>
+        <div class="qnt-div"> <span class="qnt-span"> Quantité: {{item.Quantite}}</span></div>
+        <a  class="ret-btn" (click)="RetirerDiagnostic(item.name)">Retirer</a>
+        <hr class="hr-panier">
+     </div>
+     
+  </div>
+  
+  <div class="diagno">
+     <div class="faq-item">
+        <div class="faq-question" (click)="toggleAnswer('1')">
+           <span>{{ isOpen['1'] ? '↓' : '→' }}</span>
+           <img src="/assets/image/ERP.webp" width="60" class="img-diag">
+           <div class="diagName">
+              Risques et pollutions (ERP)
+              <a  class="add-btn" (click)="ajouterAuPanier($event, 'Risques et pollutions (ERP)', '/assets/image/ERP.webp')">Ajouter</a>
+           </div>
+        </div>
+        <div class="faq-answer" *ngIf="isOpen['1']">
+           <hr>
+           <p>Un diagnostic 'état des risques et pollutions' doit être joint à la promesse de vente ou à l'acte de vente ou au bail dans les communes concernées.</p>
+        </div>
+     </div>
+  
+     <div class="faq-item">
+        <div class="faq-question" (click)="toggleAnswer('2')">
+           <span>{{ isOpen['2'] ? '↓' : '→' }}</span>
+           <img src="/assets/image/habita.webp" width="60" class="img-diag">
+           <div class="diagName">
+              Amiante
+              <a  class="add-btn"  (click)="ajouterAuPanier($event, 'Amiante' , '/assets/image/habita.webp')">Ajouter</a>
+           </div>
+        </div>
+  
+ 
+  
+  <div class="faq-answer" *ngIf="isOpen['2']">
+     <hr>
+      <p>L'état d'amiante, aussi appelé diagnostic amiante, est un document qui mentionne la présence ou l'absence de matériaux ou produits contenant de l'amiante dans un logement. Votre logement est concerné par ce diagnostic si son permis de construire a été délivré avant juillet 1997. L'état d'amiante doit être intégré au dossier de diagnostic technique (DDT). Le DDT doit être remis à l'acquéreur en cas de vente d'un logement.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('3')">
+     <span>{{ isOpen['3'] ?'↓' : '→' }}</span>
+  
+     <img   src="/assets/image/habitablee.webp" width="60" class="img-diag">
+     <div class="diagName">
+
+     Métrage (Loi Carrez)
+     <a  class="add-btn" (click)="ajouterAuPanier($event, 'Loi Carrez' , '/assets/image/habitablee.webp')">Ajouter</a>
+
+     </div>
+
+
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['3']">
+     <hr>
+      <p>Le calcul de la surface habitable d’une maison ou d’un appartement fait partie des diagnostics obligatoires avant la signature d’un contrat de location.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('4')">
+     <span>{{ isOpen['4'] ?'↓' : '→' }}</span>
+     <img   src="/assets/image/habitablee.webp" width="60" class="img-diag">
+     <div class="diagName">
+     Métrage (Loi Boutin)
+     <a  class="add-btn" (click)="ajouterAuPanier($event, 'Métrage (Loi Boutin)' , '/assets/image/habitablee.webp')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['4']">
+     <hr>
+      <p>Le calcul de la surface habitable d’une maison ou d’un appartement fait partie des diagnostics obligatoires avant la signature d’un contrat de location.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('5')">
+     <span>{{ isOpen['5'] ?'↓' : '→' }}</span>
+     
+
+     <img  src="/assets/image/h.webp" width="60" class="img-diag">
+
+     <div class="diagName">
+        Installation électricité
+
+        <a  class="add-btn"(click)="ajouterAuPanier($event, 'Installation électricité' , '/assets/image/h.webp')">Ajouter</a>
+
+</div>
+
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['5']">
+     <hr>
+      <p>L'état de l'installation intérieure d’électricité, aussi appelé diagnostic électricité, est un diagnostic qui donne un aperçu de la sécurité des installations électriques dans les logements. Votre logement est concerné par ce diagnostic si l'installation d'électricité a plus de 15 ans. Le diagnostic doit être intégré au dossier de diagnostic technique (DDT). Le DDT doit être remis à l'acquéreur ou au locataire en cas de vente ou location d'un logement.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('6')">
+     <span>{{ isOpen['6'] ?'↓' : '→' }}</span>
+     <img  src="/assets/image/habitableee (2).webp" width="60" class="img-diag">
+     <div class="diagName">
+     Installation gaz
+     <a class="add-btn" (click)="ajouterAuPanier($event, 'Installation gaz' , '/assets/image/habitableee (2).webp')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['6']">
+     <hr>
+      <p>L'état de l'installation intérieure de gaz, aussi appelé diagnostic gaz, est un diagnostic qui donne un aperçu de la sécurité des installations de gaz dans les logements. Votre logement est concerné si l'installation de gaz a plus de 15 ans. Le diagnostic doit être intégré au dossier de diagnostic technique (DDT). Le DDT doit être remis à l'acquéreur ou au locataire en cas de vente ou location d'un logement.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('7')">
+     <span>{{ isOpen['7'] ?'↓' : '→' }}</span>
+     <img  src="/assets/image/gg.webp" width="60" class="img-diag">
+     <div class="diagName">
+
+     Diagnostic termites
+     <a class="add-btn" (click)="ajouterAuPanier($event, 'Diagnostic termites' , '/assets/image/gg.webp')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['7']">
+     <hr>
+      <p>L'état relatif à la présence de termites, également appelé diagnostic termites, donne des informations sur la présence ou non d'insectes xylophages (termites : Insectes qui rongent le bois et les matériaux contenant de la cellulose en particulier) dans un logement. Ce document doit être réalisé lorsque le logement est situé dans une zone déclarée par un arrêté préfectoral. Il doit être remis au candidat acquéreur.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('8')">
+     <span>{{ isOpen['8'] ?'↓' : '→' }}</span>
+     <img  src="/assets/image/habitableee.webp" width="60" class="img-diag">
+     <div class="diagName">
+
+        Plomb (Crep)
+     
+     <a  class="add-btn" (click)="ajouterAuPanier($event, 'Plomb (Crep)' , '/assets/image/habitableee.webp')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['8']">
+     <hr>
+      <p>Le constat de risque d'exposition au plomb (Crep), aussi appelé diagnostic plomb, est un document qui donne des informations sur la présence de plomb dans les logements. Votre logement est concerné par ce diagnostic s'il a été construit avant 1949. Le Crep doit être intégré au dossier de diagnostic technique (DDT). Le DDT doit être remis à l'acquéreur ou locataire en cas de vente ou location d'un logement.</p>
+  </div>
+</div>    
+
+
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('9')">
+     <span>{{ isOpen['9'] ?'↓' : '→' }}</span>
+     <img  src="/assets/image/DPE.webp" width="60" class="img-diag">
+     <div class="diagName">
+
+     Performance énergétique (DPE)
+     <a  class="add-btn" (click)="ajouterAuPanier($event, 'Performance énergétique (DPE)' , '/assets/image/DPE.webp')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['9']">
+     <hr>
+      <p>Le DPE sert principalement à évaluer la quantité d'énergie et de gaz à effet de serre de votre logement. Vous devez faire réaliser ce diagnostic par un professionnel certifié. Vous devez intégrer le DPE au dossier de diagnostic technique (DDT) et le remettre à l'acquéreur ou au locataire lorsque vous vendez ou louez votre logement.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('10')">
+     <span>{{ isOpen['10'] ?'↓' : '→' }}</span>
+     <img  src="/assets/image/park.png" class="img-diag2">
+     <div class="diagName">
+
+
+     Supplément Parking
+     <a  class="add-btn" (click)="ajouterAuPanier($event, 'Supplément Parking' , '/assets/image/park.png')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['10']">
+     <hr>
+      <p>Le supplément parking, vise à évaluer si l'emplacement de stationnement (garage, place de parking, etc.) correspond aux normes légales et si son état est en conformité</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('11')">
+     <span>{{ isOpen['11'] ?'↓' : '→' }}</span>
+     <img  src="/assets/image/27c32540-74b0-11ed-8e6c-09ead3a7d4d7.webp" width="60" class="img-diag" >
+     <div class="diagName">
+
+
+     Diagnostic Technique Global (DTG)
+     <a  class="add-btn" (click)="ajouterAuPanier($event, 'Diagnostic Technique Global-DTG' , '/assets/image/27c32540-74b0-11ed-8e6c-09ead3a7d4d7.webp')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['11']">
+     <hr>
+      <p>Le Diagnostic Technique Global est une compilation d'informations sur l'état technique de l'immeuble. Il comprend des diagnostics sur les parties communes, l'état des équipements, les éventuels travaux à prévoir, et d'autres éléments contribuant à une vision globale de la situation technique de la copropriété.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('12')">
+     <span>{{ isOpen['12'] ?'↓' : '→' }}</span>
+     <img  src="/assets/image/dta.png" class="img-diag2">
+     <div class="diagName">
+
+
+     Dossier Technique Amiante (DTA)
+     <a  class="add-btn" (click)="ajouterAuPanier($event, 'Dossier Technique Amiante-DTA' , '/assets/image/dta.png')">Ajouter</a>
+
+     </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['12']">
+     <hr>
+      <p>Le DTA est le Dossier Technique Amiante. Il est obligatoire pour les immeubles dont le permis de construire a été délivré avant le 1er juillet 1997.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('13')">
+      <span>{{ isOpen['13'] ?'↓' : '→' }}</span>
+      <img  src="/assets/image/habitableee.webp" width="60" class="img-diag">
+      <div class="diagName">
+      Plomb Parties Communes
+      <a  class="add-btn" (click)="ajouterAuPanier($event, 'Plomb Parties Communes' , '/assets/image/habitableee.webp')">Ajouter</a>
+
+      </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['13']">
+     <hr>
+      <p>Un diagnostic Plomb dans les parties communes est obligatoire pour tous les bâtiments à usage d’habitation construits avant le 1er janvier 1949, avec le 12 août 2008 comme date butoir. Ce diagnostic également appelé Constat de risque d’exposition au plomb (CREP) est imposé même en l’absence de toute transaction immobilière.</p>
+  </div>
+</div>    
+
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('14')">
+      <span>{{ isOpen['14'] ?'↓' : '→' }}</span>
+      <img  src="/assets/image/gg.webp" width="60" class="img-diag">
+      <div class="diagName">
+      Termites Parties Communes
+      <a  class="add-btn" (click)="ajouterAuPanier($event, 'Termites Parties Communes' , '/assets/image/gg.webp')">Ajouter</a>
+
+      </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['14']">
+     <hr>
+      <p>Le diagnostic termites permet de déterminer la présence ou non de termites dans un bâtiment. C’est un document qui est particulièrement important pour connaître l’importance de la concentration des insectes dans l’immeuble, puisque ces derniers, en rongeant le bois, ont la faculté de fragiliser les habitations, ce qui met en danger les résidents, qu’il s’agisse de copropriétaires occupants ou de locataires.</p>
+  </div>
+</div> 
+
+<div class="faq-item">
+  <div class="faq-question" (click)="toggleAnswer('15')">
+      <span>{{ isOpen['15'] ?'↓' : '→' }}</span>
+      <img  src="/assets/image/assainissement.webp" width="60" class="img-diag">
+      <div class="diagName">
+        Assainissement
+      <a  class="add-btn" (click)="ajouterAuPanier($event, 'Assainissement' , '/assets/image/assainissement.webp')">Ajouter</a>
+
+      </div>
+  </div>
+  <div class="faq-answer" *ngIf="isOpen['15']">
+     <hr>
+      <p>Lorsqu'un bien n'est pas raccordé au réseau public de collecte des eaux usées, il doit être équipé d'une installation d'assainissement non collectif autonome. Cette installation doit faire l'objet d'un contrôle effectué par la commune. Le contrôle donne lieu à un diagnostic. En cas de vente, le vendeur doit annexer ce diagnostic au sein d'un dossier de diagnostic technique (DDT). Le DDT doit être remis à l'acquéreur.</p>
+  </div>
+</div> 
+<div id="error"  *ngIf="showError2"  class="error-message">
+   
+  <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">
+  Certains champs sont vides ou ne respectent pas les règles de format. Merci de les compléter correctement avant de continuer.
+
+</div>
+</div>
+</div>
+
+
+
+<div id="contactForm" *ngIf="step === 4"  >
+  
+    <h6 class="h6-project"><span class="span-project">4</span> Informations personnelles</h6>
+            
+               <div class="message-box">
+                  <i class="fas fa-info-circle"></i>
+                  Afin de recevoir votre devis, veuillez svp remplir les champs suivants et répondre aux questions éventuelles
+                </div>
+            
+            
+                <h5>Êtes-vous un(e)... </h5>
+                <div class="objective-buttons">
+                  <a class="objective-button" 
+                     [ngClass]="{'active': selectedObjectives3['Type de donneur d ordre'] === 'particulier (propriétaire du bien)'}" 
+                     (click)="setActive('Type de donneur d ordre', 'particulier (propriétaire du bien)')">
+                     particulier (propriétaire du bien) <span *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'particulier (propriétaire du bien)'" class="check-icon">✔</span>
+                  </a>
+                  <a class="objective-button" 
+                     [ngClass]="{'active': selectedObjectives3['Type de donneur d ordre'] === 'société (propriétaire du bien)'}" 
+                     (click)="setActive('Type de donneur d ordre', 'société (propriétaire du bien)')">
+                     société (propriétaire du bien) <span *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'société (propriétaire du bien)'" class="check-icon">✔</span>
+                  </a>
+                  <a class="objective-button" 
+                     [ngClass]="{'active': selectedObjectives3['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'}" 
+                     (click)="setActive('Type de donneur d ordre', 'professionnel mandaté par le propriétaire')">
+                     professionnel mandaté par le propriétaire <span *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'" class="check-icon">✔</span>
+                  </a>
+                </div>
+                      <div class="item">
+                    
+                        
+                           <div *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'">                       
+            
+                               <div id="cordonee" >
+                 
+                                   
+                                 <div class="form-row">
+                                   <div class="input-group">
+                                     <label for="prenom">Nom de votre société (intermédiaire)</label>
+                                     <input type="text" placeholder="Saisir le nom  de votre société" class="uk-input" [(ngModel)]="selectedObjectives3['Nom de votre société (intermédiaire)']" 
+                                     (ngModelChange)="setActive('Nom de votre société (intermédiaire)', $event)">                              
+                                   </div>
+                      
+                    
+                               
+                                 </div>
+                               </div>
+                 
+                               </div>
+                           <div *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'société (propriétaire du bien)'">
+                            <div style="margin-top: 40px;">    <h6 >Société </h6></div> 
+                        
+               
+                             <div id="cordonee" >
+               
+                               <div class="form-row">
+                                 <div class="input-group">
+                                   <label for="prenom">Nom de votre société</label>
+                                   <input type="text" id="nom_societe"  placeholder="Saisir le nom de votre société" required  [(ngModel)]="selectedObjectives3['Nom de votre société']" 
+                                   (ngModelChange)="setActive('Nom de votre société', $event)">
+                                   
+                                 </div>
+                    
+                  
+                             
+                               </div>
+                             </div>
+               
+                             </div>
+                   
+                            
+                           <div >
+                          
+                             <div>
+                                
+                             </div>
+                              <h6 *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'particulier (propriétaire du bien)'" >
+                                 Vos coordonnées
+                               </h6>
+            
+                               <h6 *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'société (propriétaire du bien)'" >
+                                 Contact principal
+                              </h6>
+                               
+                               
+                               
+            
+                              <div *ngIf="selectedObjectives3['Type de donneur d ordre'] === undefined ">
+                                            </div> 
+                                              
+                          <div id="cordonee" *ngIf="selectedObjectives3['Type de donneur d ordre'] !=undefined ">
+            
+                            <div class="form-row">
+                              <div class="input-group">
+                                <label for="prenom">Prénom</label>
+                                <input type="text" id="prenom"  placeholder="Saisir votre prénom" required  [(ngModel)]="selectedObjectives3['Prénom']" 
+                                (ngModelChange)="setActive('Prénom', $event)">
+                                
+                              </div>
+                
+                              <div class="input-group">
+                                <label for="nom">Nom</label>
+                                <input type="text" id="nom"  placeholder="Saisir votre nom" required [(ngModel)]="selectedObjectives3['Nom']" 
+                                (ngModelChange)="setActive('Nom', $event)">
+                               
+                              </div>
+                            </div>
+                
+                            <div class="form-row">
+                              <div class="input-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email"  placeholder="Saisir votre email" required [(ngModel)]="selectedObjectives3['Email']" 
+                                (ngModelChange)="setActive('Email', $event)">
+                                <div *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)">
+                                  <small *ngIf="formControls.email.errors?.['required']">Email is required.</small>
+                                  <small *ngIf="formControls.email.errors?.['email']">Please enter a valid email address.</small>
+                                </div>
+                              </div>
+                
+                              <div class="input-group">
+                                <label for="telephone">Téléphone</label>
+                                <input type="tel" id="telephone"  placeholder="Saisir votre téléphone" required [(ngModel)]="selectedObjectives3['Téléphone']" 
+                                (ngModelChange)="setActive('Téléphone', $event)">
+                                <div *ngIf="formControls.telephone.invalid && (formControls.telephone.dirty || formControls.telephone.touched)">
+                                  <small *ngIf="formControls.telephone.errors?.['required']">Téléphone is required.</small>
+                                </div>
+                              </div>
+                            </div>
+            
+            
+            
+                       
+                          </div>
+                     
+                    
+            
+                          </div>
+            
+                      
+            
+                        
+            
+                          <div  *ngIf="selectedObjectives3['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'">
+                           <h5 >
+                              Votre client est un(e)....</h5>
+                           <div class="objective-buttonse" >
+                               <a class="objective-button" [ngClass]="{'active': selectedObjectives3['Votre client est un(e)'] === 'particulier'}" (click)="setActive('Votre client est un(e)','particulier')">
+                                   particulier <span *ngIf="selectedObjectives3['Votre client est un(e)'] === 'particulier'" class="check-icon">✔</span>
+                               </a>
+                               <a class="objective-button" [ngClass]="{'active': selectedObjectives3['Votre client est un(e)'] === 'Société'}" (click)="setActive('Votre client est un(e)','Société')">
+                                   société <span *ngIf="selectedObjectives3['Votre client est un(e)'] === 'Société'" class="check-icon">✔</span>
+                               </a>
+
+                               </div>
+                           </div>
+                           <div *ngIf="selectedObjectives3['Votre client est un(e)'] === 'Société' && selectedObjectives3['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire' "  >
+                              <div id="pre"> <label>Société</label>
+                                <div id="cordonee" >
+                             
+                                   <div class="form-row">
+                                     <div class="input-group">
+                                       <label for="prenom">Nom de votre société (client)</label>
+                                       <input type="text" placeholder="Nom de votre société (client)" class="uk-input" [(ngModel)]="selectedObjectives3['Nom de votre société (client)']" 
+                                       (ngModelChange)="setActive('Nom de votre société (client)', $event)">                               
+                                     </div>
+                                   </div>
+                          </div>
+                          </div>
+                          <label for="prenom">Contact principal</label>
+                               <div id="cordonee" >
+                                   
+
+                                    <div class="form-row">
+                                      <div class="input-group">
+                                        <label for="prenom">Nom du contact principal</label>
+                                        <input type="text" id="prenom"  placeholder="Saisir votre prénom" required [(ngModel)]="selectedObjectives3['Nom du contact principal']" 
+                                        (ngModelChange)="setActive('Nom du contact principal', $event)">
+                                       
+                                      </div>
+                        
+                                   
+                                    </div>
+                        
+                                    <div class="form-row">
+                                      <div class="input-group">
+                                        <label for="email">Email de contact principal</label>
+                                        <input type="email" id="email"  placeholder="Saisir votre email" required [(ngModel)]="selectedObjectives3['Email de contact principal']" 
+                                        (ngModelChange)="setActive('Email de contact principal', $event)">
+                                        <div *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)">
+                                          <small *ngIf="formControls.email.errors?.['required']">Email is required.</small>
+                                          <small *ngIf="formControls.email.errors?.['email']">Please enter a valid email address.</small>
+                                        </div>
+                                      </div>
+                        
+                                      <div class="input-group">
+                                        <label for="telephone">Téléphone de contact principal</label>
+                                        <input type="tel" id="telephone"  placeholder="Saisir votre téléphone" required  [(ngModel)]="selectedObjectives3['Téléphone de contact principal']" 
+                                        (ngModelChange)="setActive('Téléphone de contact principal', $event)">
+                                        <div *ngIf="formControls.telephone.invalid && (formControls.telephone.dirty || formControls.telephone.touched)">
+                                          <small *ngIf="formControls.telephone.errors?.['required']">Téléphone is required.</small>
+                                        </div>
+                                      </div>
+                                    </div>
+                    
+                    
+                    
+                               
+                                  </div>
+                               </div>
+                               <div *ngIf="selectedObjectives3['Votre client est un(e)'] === 'particulier' && selectedObjectives3['Type de donneur d ordre'] === 'professionnel mandaté par le propriétaire'">
+                                <form #form="ngForm" novalidate>
+                                  <div id="cordonee">
+                                    <div class="form-row">
+                                      <!-- Prénom -->
+                                      <div class="input-group">
+                                        <label for="prenom">Prénom du client</label>
+                                        <input
+                                          type="text"
+                                          id="prenom"
+                                          placeholder="Saisir votre prénom"
+                                          required
+                                          name="prenom"
+                                          [(ngModel)]="selectedObjectives3['Prénom du client']"
+                                          #prenom="ngModel"
+                                        />
+                                       
+                                      </div>
+                                
+                                      <!-- Nom -->
+                                      <div class="input-group">
+                                        <label for="nom">Nom du client</label>
+                                        <input
+                                          type="text"
+                                          id="nom"
+                                          placeholder="Saisir votre nom"
+                                          required
+                                          name="nom"
+                                          [(ngModel)]="selectedObjectives3['Nom du client']"
+                                          #nom="ngModel"
+                                        />
+                                        
+                                      </div>
+                                    </div>
+                                
+                                    <div class="form-row">
+                                      <!-- Email -->
+                                      <div class="input-group">
+                                        <label for="email">Email</label>
+                                        <input
+                                          type="email"
+                                          id="email"
+                                          placeholder="Saisir votre email"
+                                          required
+                                          name="email"
+                                          [(ngModel)]="selectedObjectives3['Email de client']"
+                                          #email="ngModel"
+                                        />
+                                        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                                          <small *ngIf="email.errors?.required">Email is required.</small>
+                                          <small *ngIf="email.errors?.email">Please enter a valid email address.</small>
+                                        </div>
+                                      </div>
+                                
+                                      <!-- Téléphone -->
+                                      <div class="input-group">
+                                        <label for="telephone">Téléphone</label>
+                                        <input
+                                          type="tel"
+                                          id="telephone"
+                                          placeholder="Saisir votre téléphone"
+                                          required
+                                          name="telephone"
+                                          [(ngModel)]="selectedObjectives3['Téléphone de client']"
+                                          #telephone="ngModel"
+                                        />
+                                        <div *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)">
+                                          <small *ngIf="telephone.errors?.required">Téléphone is required.</small>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                                
+                                    </div>
+                          <h5>Commentaire</h5>
+                          <textarea id="message"  rows="4" placeholder="Saisir votre commentaire" required [(ngModel)]="selectedObjectives3['Commentaire']" 
+                          (ngModelChange)="setActive('Commentaire', $event)">
+                             
+                          </textarea>
+                         
+                        
+                          
+                         
+                      </div>
+
+                      <div id="error" *ngIf="errorMessage" class="error-message">
+                        <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">  {{ errorMessage }}
+                      </div>
+  
+  </div>
+
+
+
+
+<div id="contactForm" *ngIf="step === 5"  >
+  <h6 class="h6-project"><span class="span-project">5</span> Votre panier</h6>
+            
+  <div class="message-box">
+     <i class="fas fa-info-circle"></i>
+     Veuillez svp vérifier les détails de votre panier avant de passer à la dernière étape.
+   </div>
+
+ 
+  
+   <h6 >Détails du panier</h6>
+
+
+   <div class="panierr">
+
+ <div>
+  <a class="modf-panier" (click)="Modifier('Votre projet')">Modifier</a>
+
+     <span class="panier-details-span"> <i  class="fa fa-check-square icon-panier" aria-hidden="true"></i>
+
+        Votre projet</span>
+
+        <ul>
+           <li class="li-step5" *ngFor="let item of selectedObjectives | keyvalue">
+            <span class="key">{{ item.key }} :</span> <span>{{ item.value }}</span> 
+           </li>
+         </ul>
+         
+
+
+   </div>
+  <hr>
+
+  <div>
+     <a class="modf-panier" (click)="Modifier('Votre bien')">Modifier</a>
+  
+        <span class="panier-details-span"><i class="fa fa-th icon-panier" aria-hidden="true"></i>
+           Votre bien</span>
+  
+        <ul>
+           <li class="li-step5" *ngFor="let item of selectedObjectives2 | keyvalue">
+              <span class="key">{{ item.key }} :</span> <span>{{ item.value }}</span> 
+
+
+           </li>
+      
+
+        </ul>
+  
+  
+      </div>
+      <hr>
+
+      <div>
+        <a class="modf-panier" (click)="Modifier('Informations personnelle')">Modifier</a>
+     
+           <span class="panier-details-span"><i class="fa fa-user icon-panier" aria-hidden="true"></i>Informations personnelle</span>
+     
+           <ul>
+              <li class="li-step5" *ngFor="let item of selectedObjectives3 | keyvalue">
+                 <span class="key">{{ item.key }} :</span> <span>{{ item.value }}</span> 
+  
+  
+              </li>
+  
+           </ul>
+     
+     
+         </div>
+
+   </div>
+
+
+   <div class="panierr" *ngIf="panier.length>0">
+     <div class="panier-content">
+        <h6>
+
+           <i class="fa fa-shopping-cart shop-i" aria-hidden="true"></i>
+           <span class="panier-details-span">Ma sélection ({{panier.length}})</span>
+
+        </h6>
+
+        <a class="del-panier" (click)="Modifier('Ma sélection')">Modifier</a>
+     </div>
+
+     <div *ngFor="let item of panier">
+           
+        <img [src]="item.image" width="50" class="img-panier">
+
+       <span class="item-name">{{item.name}}</span> <br>
+        <div class="qnt-div"> <span class="qnt-span"> Quantité: {{item.Quantite}}</span></div>
+        <a  class="ret-btn" (click)="RetirerDiagnostic(item.name)">Retirer</a>
+        <hr class="hr-panier">
+     </div>
+     
+  </div>
+
+
+
+</div>
+
+
+
+   <div class="button-group">
+      <div>
+       <button type="button" class="uk-button uk-button-primary" (click)="goBack()" [disabled]="step === 1">Précédent</button>
+      </div>
+       <button    *ngIf="step<=4" type="button" class="uk-button uk-button-primary"  (click)="nextStep()" >Continuer</button>
+       <button *ngIf="step===5" type="button" class="uk-button uk-button-primary"  (click)="sendMail()" >Demander un devis</button>
+
+   </div>
+</div>
+
+
+       </div>
+</section>
+<!-- End Contact Area -->

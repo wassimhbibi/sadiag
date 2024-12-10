@@ -1,0 +1,50 @@
+<!-- Start Page Title Area -->
+<section class="page-title-area uk-page-title">
+    <div class="uk-container">
+        <h1>Obtenez un devis rapide</h1>
+        <ul>
+            <h5><li >Diagnostic immobilier à Paris et dans toute la France</li></h5>
+            </ul>
+        <ul>
+           
+            <li><a routerLink="/une-question" class="uk-button uk-button-default" style="color: white;">Une Question ?</a></li>
+        </ul>
+    </div>
+</section>
+<!-- End Page Title Area -->
+
+<!-- Start Services Area -->
+<!-- End Page Title Area -->
+<section class="services-area uk-services uk-section">
+    <div class="uk-container">
+        <div class="container">
+            <h2>Que souhaitez-vous faire ?</h2>
+            <p>Veuillez sélectionner une option parmi les choix ci-dessous</p>
+            <div class="card-grid">
+                <div *ngFor="let option of options; let i = index"
+                     class="card"
+                     [ngClass]="{'selected': selectedOptionIndex === i}"
+                     (click)="selectOption(i)">
+                    <ng-container *ngIf="option.icon">
+                        <i class="icon-info"></i>
+                    </ng-container>
+                    <ng-container *ngIf="option.image">
+                        <img [src]="option.image" alt="{{ option.label }}" />
+                    </ng-container>
+                    <hr [ngClass]="{ 'separator-line': true, 'selected-line': selectedOptionIndex === i }"/>
+                    <p [class.selected-text]="selectedOptionIndex === i">{{ option.label }}</p>
+                </div>
+            </div>
+            <p style="transform: translateY(40%);color:#263548 ;">Pour toute autre demande ou question, notre équipe est là pour vous aider. Contactez-nous à l'adresse 
+                <a (click)="mail()">contact@sadiag.com</a>.
+            </p>
+            <a 
+  [routerLink]="getDynamicLink()" 
+  class="uk-button uk-button-default" 
+  [attr.disabled]="selectedOptionIndex === null ? true : null">
+  Continuer
+</a>
+        </div>
+    </div>
+</section>
+<!-- End Services Area -->

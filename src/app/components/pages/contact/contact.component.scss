@@ -1,0 +1,253 @@
+.page-title-area {
+    background: {
+        image: url(/assets/image/m1.jpg);
+    }
+}
+.container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.selected-text {
+    color: #8cbe23;
+  }
+  .separator-line {
+    border: none;
+    border-top: 2px solid #263548;
+    width: 100%; /* Adjust the width as needed */
+    margin: 10px auto; /* Center the line and add spacing */
+  }
+  /* Style for the line when the card is selected */
+.selected-line {
+    border-top-color: #8cbe23;
+  }
+h2 {
+    margin-top: 20px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    transform: translateX(13%);
+}
+
+.checkmark {
+    background: linear-gradient(45deg, #8cbe23, #d9ff00); /* Red to orange gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 24px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+#br {
+    color: #8cbe23;
+}
+
+/* Ensure the grid behaves properly */
+.uk-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Disable the button style */
+.uk-button[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Optional: add a custom style for when it's selected */
+.uk-button:not([disabled]) {
+    background-color: #8cbe23;
+    color: white;
+}
+
+/* Responsive adjustments for button */
+.full-width-button {
+    width: auto;
+}
+
+@media (max-width: 600px) {
+    h1, h2, h4,h5 p {
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .full-width-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .feedback-img {
+        text-align: center;
+    }
+
+    .section-title h4,h5 {
+        font-size: 0.9em;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .uk-container {
+        padding: 0 15px;
+    }
+}
+
+/* Ensure both items are on the same row */
+.uk-grid > .item {
+    width: 45%;
+}
+
+/* Push the second item to the right */
+#item {
+    margin-left: auto;
+}
+
+#contact {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    overflow: hidden;
+}
+
+#contact img {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    z-index: -1;
+}
+.item h5{
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+}
+h4 {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+}
+.container p{
+    color:#8cbe23;
+}
+.card {
+    width: 250px;
+    height: 220px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #263548;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.icon-container {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 18px;
+    color: #8cbe23;
+}
+
+.card.selected {
+    border-color: #8cbe23;
+    background-color: #ecffdf;
+}
+
+.card img {
+    width: 300px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 14px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 5px;
+    color: #263548;
+}
+
+.continue-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #8cbe23;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.continue-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.continue-button:hover:not(:disabled) {
+    background-color: #8cbe23;
+}
+
+.powered-by {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Responsive adjustments for card layout */
+@media (max-width: 768px) {
+    .uk-grid > .item {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        width: 40%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Responsive layout for contact section */
+@media (max-width: 600px) {
+    #contact {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #contact img {
+        height: 50%; /* Adjust image height */
+    }
+}

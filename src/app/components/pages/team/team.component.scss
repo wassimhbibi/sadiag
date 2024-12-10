@@ -1,0 +1,161 @@
+/* General Container Styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Header Section */
+.header-section {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.header-section h1 {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.header-section p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Content Row Styling */
+.content-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 40px;
+}
+#ol {
+    margin-bottom: 150px;
+}
+
+.text-column {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+#h11 {
+    color: #263548;
+}
+.page-title-area {
+    background-image: url(/assets/image/m1.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.image-column {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+.image-column img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Titles */
+.text-column h2 {
+    font-size: 1.8rem;
+    color: #263548;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.text-column p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Adjustments for Alternating Layout */
+.content-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+#tra {
+    transform: translateY(18%);
+}
+#traa {
+    transform: translateY(10%);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    /* Slight adjustments for medium screens */
+    .header-section h1 {
+        font-size: 2rem;
+    }
+    .text-column h2 {
+        font-size: 1.6rem;
+    }
+    .text-column p {
+        font-size: 0.9rem;
+    }
+    .image-column {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-row {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    
+    .text-column, .image-column {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    /* Adjust font sizes for smaller screens */
+    .header-section h1 {
+        font-size: 1.8rem;
+    }
+    
+    .text-column h2 {
+        font-size: 1.5rem;
+    }
+
+    .text-column p {
+        font-size: 1rem;
+    }
+
+    /* Adjust padding and transform properties */
+    #tra, #traa {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile specific adjustments */
+    .header-section h1 {
+        font-size: 1.5rem;
+    }
+    .text-column h2 {
+        font-size: 1.3rem;
+    }
+    .text-column p {
+        font-size: 0.9rem;
+    }
+
+    /* Hide the image column on mobile screens only */
+    #img1 {
+        display: none;
+    }
+
+    /* Increase button width for smaller screens */
+    .uk-button {
+        width: 100%;
+        padding: 10px;
+    }
+}

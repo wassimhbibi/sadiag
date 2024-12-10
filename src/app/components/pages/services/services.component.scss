@@ -1,0 +1,140 @@
+.container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h2 {
+    margin-top: 20px;
+}
+.uk-button[disabled] {
+    opacity: 0.5; /* Makes the button appear faded when disabled */
+    pointer-events: none; /* Prevents clicks on the disabled button */
+  }
+  @media (max-width: 768px) {
+    /* Make button full-width on mobile */
+    .full-width-button {
+        width: 100%;
+    }
+    
+    /* Adds spacing around cards on smaller screens */
+    .card {
+        margin-bottom: 15px;
+    }
+}
+  /* Optional: add a custom style for when it's selected */
+  .uk-button:not([disabled]) {
+    background-color: #8cbe23; /* Change background when button is active */
+    color: white;
+  }
+  .selected-text {
+    color: #8cbe23;
+  }
+  .separator-line {
+    border: none;
+    border-top: 2px solid #263548;
+    width: 100%; /* Adjust the width as needed */
+    margin: 10px auto; /* Center the line and add spacing */
+  }
+  /* Style for the line when the card is selected */
+.selected-line {
+    border-top-color: #8cbe23;
+  }
+ .container p{color:#8cbe23}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.card {
+    width: 160px;
+    height: 190px; /* Increased height for fixed positioning */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Spaces the image and text */
+    border: 2px solid #263548;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+
+.icon-container {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 18px;
+    color: #8cbe23;
+}
+
+.card.selected {
+    border-color: #8cbe23;
+    background-color: #ecffdf;
+}
+
+.card img {
+    width: 300px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 14px;
+    min-height: 40px; /* Fixed height for text area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 5px;
+    color: #263548;
+}
+
+.continue-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #8cbe23;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.continue-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.continue-button:hover:not(:disabled) {
+    background-color: #8cbe23;
+}
+
+.powered-by {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #999;
+}
+.page-title-area {
+
+
+    background: {
+   
+      image: url(/assets/image/hotels-family.jpg);
+    
+    }}

@@ -1,0 +1,155 @@
+<section class="page-title-area uk-section uk-funfacts sec11">
+  <div class="overlay"></div>
+  <div class="uk-container">
+      <div class="text-content">
+          <h1 class="h1-sec11">Obtenez un devis rapide</h1>
+          <h5><p class="p-sec11">DIAGNOSTICS IMMOBILIERS À PARIS ET DANS TOUTE LA FRANCE</p></h5>
+          <a routerLink="/une-question" class="uk-button uk-button-default">UNE QUESTION ?</a>
+      </div>
+  </div>
+</section>
+
+<!-- Start Contact Area -->
+<section id="contact" class="contact-area uk-contact uk-section">
+  <div class="uk-container">
+      <div class="item">
+          <div class="uk-section-title section-title">
+              <h3>Demande particulière</h3>
+              
+              <!-- Progress Bar -->
+            
+             
+          </div>
+
+         
+          <div class="message-box">
+              <img src="/assets/image/information-button.png" style="transform: translate(-30%,-40%);width: 20px;">
+              Précisez l'objet de votre demande et nous y répondrons dans les plus brefs délais.
+          </div>
+
+          <form id="contactForm"  [formGroup]="Formrappel">
+              <h5>Objet de votre demande</h5>
+          <textarea id="message" formControlName="message" rows="4" placeholder="Saisir l'objet de votre demende" required></textarea>
+          <div *ngIf="formControls.message.invalid && (formControls.message.dirty || formControls.message.touched)">
+            <small *ngIf="formControls.message.errors?.['required']">Le message est requis.</small>
+          </div>
+
+          <h3>Vos coordonnées</h3>
+  
+            <div id="cordonee">
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="prenom">Prénom</label>
+                  <input
+                    type="text"
+                    id="prenom"
+                    formControlName="prenom"
+                    placeholder="Saisir votre prénom"
+                  />
+                  <div
+                    *ngIf="formControls.prenom.invalid && (formControls.prenom.dirty || formControls.prenom.touched)"
+                  >
+                    <small *ngIf="formControls.prenom.errors?.['required']">
+                      Le Prénom est requis.
+                    </small>
+                  </div>
+                </div>
+          
+                <div class="input-group">
+                  <label for="nom">Nom</label>
+                  <input
+                    type="text"
+                    id="nom"
+                    formControlName="nom"
+                    placeholder="Saisir votre nom"
+                  />
+                  <div
+                    *ngIf="formControls.nom.invalid && (formControls.nom.dirty || formControls.nom.touched)"
+                  >
+                    <small *ngIf="formControls.nom.errors?.['required']"> Le Nom est requis.</small>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    placeholder="Saisir votre email"
+                  />
+                  <div
+                    *ngIf="formControls.email.invalid && (formControls.email.dirty || formControls.email.touched)"
+                  >
+                    <small *ngIf="formControls.email.errors?.['required']">
+                     Le Email est requis.
+                    </small>
+                    <small *ngIf="formControls.email.errors?.['email']">
+                      Veuillez saisir une adresse email valide.
+                    </small>
+                  </div>
+                </div>
+          
+                <div class="input-group">
+                  <label for="telephone">Téléphone</label>
+                  <input
+                    type="tel"
+                    id="telephone"
+                    formControlName="telephone"
+                    placeholder="Saisir votre téléphone"
+                  />
+                  <div
+                    *ngIf="formControls.telephone.invalid && (formControls.telephone.dirty || formControls.telephone.touched)"
+                  >
+                    <small *ngIf="formControls.telephone.errors?.['required']">
+                      Le Téléphone est requis.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             
+
+          <label for="telephone">Êtes-vous une société ?</label>
+
+          <div class="objective-buttonse" >
+              <a class="objective-button" [ngClass]="{'active': selectedObjective === 'Oui'}" (click)="setActive('Oui')">
+                  Oui <span *ngIf="selectedObjective === 'Oui'" class="check-icon">✔</span>
+              </a>
+              <a class="objective-button" [ngClass]="{'active': selectedObjective === 'Non'}" (click)="setActive('Non')">
+                  Non <span *ngIf="selectedObjective === 'Non'" class="check-icon">✔</span>
+              </a>
+              </div>
+  
+              <div id="cordonee" *ngIf="selectedObjective === 'Oui'">
+                  <div class="form-row">
+                    <div class="input-group">
+                      <label for="prenom">Nom de la société</label>
+                      <input type="text" id="prenom" formControlName="nom_societe" placeholder="Saisir le nom de la société" required>
+                      <div *ngIf="formControls.prenom.invalid && (formControls.prenom.dirty || formControls.prenom.touched)">
+                        <small *ngIf="formControls.prenom.errors?.['required']">Le Nom de la société est requis.</small>
+                      </div>
+                    </div>
+      
+                    
+                  </div>
+      
+                    
+                </div>
+      
+                     <div id="error" *ngIf="errorMessage" class="error-message">
+                                <img src="/assets/image/exclamation.png" style="transform: translate(-30%,-10%);width: 20px;">  {{ errorMessage }}
+                              </div>
+          
+              <div class="button-group">
+                  <button [routerLink]="'/devis-gratuit'" type="button" class="uk-button uk-button-default">Précédent</button>
+                  <button  type="button" class="uk-button uk-button-primary" (click)="send()">Envoyer</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</section>
+<!-- End Contact Area -->
